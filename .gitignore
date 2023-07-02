@@ -1,0 +1,18 @@
+# Maven
+/**/target/
+
+# VSCode
+/**/.vscode/
+
+# Eclipse
+/**/.settings/
+/**/.classpath
+/**/.project
+
+# IDEA
+/**/.idea/
+/**/*.iml
+
+# draw.io
+/**/.$*.bkp
+/**/.$*.dtmp
