@@ -5,15 +5,31 @@ import io.github.swsk33.codepost.config.FreeMarkerLoaderConfig;
 import io.github.swsk33.codepost.context.ServiceNameContext;
 import io.github.swsk33.codepost.model.config.MailConfig;
 
-import java.io.File;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * FreeMarker模板实用类
  */
 public class TemplateUtils {
+
+	/**
+	 * 存放每个时间单位的名称
+	 */
+	private static final Map<TimeUnit, String> TIME_UNIT_NAME_MAP = new HashMap<>();
+
+	// 初始化事件单位名称
+	static {
+		TIME_UNIT_NAME_MAP.put(TimeUnit.NANOSECONDS, "纳秒");
+		TIME_UNIT_NAME_MAP.put(TimeUnit.MICROSECONDS, "微秒");
+		TIME_UNIT_NAME_MAP.put(TimeUnit.MILLISECONDS, "毫秒");
+		TIME_UNIT_NAME_MAP.put(TimeUnit.SECONDS, "秒");
+		TIME_UNIT_NAME_MAP.put(TimeUnit.MINUTES, "分钟");
+		TIME_UNIT_NAME_MAP.put(TimeUnit.HOURS, "小时");
+		TIME_UNIT_NAME_MAP.put(TimeUnit.DAYS, "天");
+	}
 
 	/**
 	 * 渲染模板
@@ -41,17 +57,18 @@ public class TemplateUtils {
 	/**
 	 * 渲染一个验证码邮件模板
 	 *
-	 * @param siteName       网站名
 	 * @param serviceNameKey 服务名的键
 	 * @param code           验证码
+	 * @param period         验证码有效时长
+	 * @param timeUnit       验证码有效时长的时间单位
 	 * @return 渲染后的模板字符串
 	 */
-	public static String renderVerifyMailTemplate(String siteName, String serviceNameKey, String code) {
+	public static String renderVerifyMailTemplate(String serviceNameKey, String code, long period, TimeUnit timeUnit) {
 		Map<String, Object> vars = new HashMap<>();
-		vars.put("site-name", siteName);
-		vars.put("service-name", ServiceNameContext.getServiceName(serviceNameKey));
+		vars.put("serviceName", ServiceNameContext.getServiceName(serviceNameKey));
 		vars.put("code", code);
-		return renderTemplate(vars, MailConfig.getInstance().getTemplatePath() + File.separator + MailConfig.getInstance().getVerifyCodeTemplateName());
+		vars.put("time", period + TIME_UNIT_NAME_MAP.get(timeUnit));
+		return renderTemplate(vars, MailConfig.getInstance().getCodeTemplateName());
 	}
 
 }

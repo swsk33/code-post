@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 public interface EmailVerifyCodeService {
 
 	/**
-	 * 发送验证码，使用默认服务名default
+	 * 发送验证码，使用默认服务名
 	 *
 	 * @param userId        验证码对应的用户id
 	 * @param receiverEmail 验证码接收者邮箱
@@ -29,7 +29,7 @@ public interface EmailVerifyCodeService {
 	void sendCode(String serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit);
 
 	/**
-	 * 校验验证码，使用默认服务名default
+	 * 校验验证码，使用默认服务名
 	 *
 	 * @param userId    验证码对应的用户id
 	 * @param inputCode 用户传入的验证码，用于校验

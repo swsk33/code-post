@@ -95,6 +95,6 @@ public class MailConfig {
 	 * 该项只填写文件名！<br>
 	 * 该项会和templatePath配置值拼接得到完整文件路径
 	 */
-	private String verifyCodeTemplateName;
+	private String codeTemplateName;
 
 }

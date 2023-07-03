@@ -39,7 +39,7 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 		// 暂存验证码
 		EmailCodeContext.saveCode(mailConfig.getCodeStorage(), generateCodeKey(serviceNameKey, userId), code, period, timeUnit);
 		// 渲染验证码模板
-		String mailContent = renderVerifyMailTemplate(mailConfig.getSiteName(), serviceNameKey, code);
+		String mailContent = renderVerifyMailTemplate(serviceNameKey, code, period, timeUnit);
 		// 发送邮件
 		sendEmail(mailConfig.getSiteName() + " - " + ServiceNameContext.getServiceName(serviceNameKey), mailContent, new String[]{receiverEmail}, mailConfig.isEnableHTML());
 		log.info("已向" + receiverEmail + "发送验证码邮件！");
