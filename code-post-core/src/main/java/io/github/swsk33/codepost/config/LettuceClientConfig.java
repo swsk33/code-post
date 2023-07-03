@@ -5,10 +5,12 @@ import io.github.swsk33.codepost.model.config.RedisClientConfig;
 import io.github.swsk33.codepost.util.URLEncodeUtils;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.async.RedisAsyncCommands;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Redis连接客户端（Lettuce客户端）的配置
  */
+@Slf4j
 public class LettuceClientConfig {
 
 	/**
@@ -54,6 +56,7 @@ public class LettuceClientConfig {
 	public static RedisAsyncCommands<String, String> getCommands() {
 		if (commands == null) {
 			commands = getClient().connect().async();
+			log.info("Redis连接已建立！");
 		}
 		return commands;
 	}

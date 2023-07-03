@@ -34,6 +34,7 @@ public class ThreadPoolCodeStrategy implements EmailCodeStrategy {
 		codeMap = new ConcurrentHashMap<>();
 		scheduleMap = new ConcurrentHashMap<>();
 		executor = Executors.newScheduledThreadPool(24);
+		log.info("本地线程池已完成初始化！");
 	}
 
 	@Override

@@ -60,11 +60,6 @@ public class MailConfig {
 	private boolean enableSSL = true;
 
 	/**
-	 * 网站名（用于放入验证码邮件标题）
-	 */
-	private String siteName;
-
-	/**
 	 * 验证码的保存方式
 	 */
 	private String codeStorage = CodeStorageMethod.LOCAL_THREAD_POOL;
@@ -75,8 +70,31 @@ public class MailConfig {
 	private String codeFormat = CodeGenerateMethod.NUMBER;
 
 	/**
-	 * 启用模板引擎发送HTML邮件（使用FreeMarker）
+	 * 验证码长度
 	 */
-	private boolean enableTemplateEngine;
+	private int codeLength = 6;
+
+	/**
+	 * 网站名
+	 */
+	private String siteName;
+
+	/**
+	 * 启用是否发送HTML邮件
+	 */
+	private boolean enableHTML = false;
+
+	/**
+	 * 模板文件所在目录
+	 * 需要以file:或者classpath:开头，分别代表文件系统路径或者类路径
+	 */
+	private String templatePath;
+
+	/**
+	 * 用于邮件验证码内容的模板文件名<br>
+	 * 该项只填写文件名！<br>
+	 * 该项会和templatePath配置值拼接得到完整文件路径
+	 */
+	private String verifyCodeTemplateName;
 
 }
