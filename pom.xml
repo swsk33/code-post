@@ -97,6 +97,13 @@
 				<version>6.2.4.RELEASE</version>
 			</dependency>
 
+			<!-- Logback日志 -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.4.8</version>
+			</dependency>
+
 			<!-- Spring Boot Starter支持 -->
 			<dependency>
 				<groupId>org.springframework.boot</groupId>

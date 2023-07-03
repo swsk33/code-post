@@ -30,6 +30,13 @@
 			<artifactId>jakarta.mail</artifactId>
 		</dependency>
 
+		<!-- Logback日志 -->
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<optional>true</optional>
+		</dependency>
+
 		<!-- Lettuce Redis客户端 -->
 		<dependency>
 			<groupId>io.lettuce</groupId>

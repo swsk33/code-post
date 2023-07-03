@@ -45,7 +45,7 @@ public class RedisClientConfig {
 	/**
 	 * Redis端口
 	 */
-	private int port;
+	private int port = 6379;
 
 	/**
 	 * Redis密码

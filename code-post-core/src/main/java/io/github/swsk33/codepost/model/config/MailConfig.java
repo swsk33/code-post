@@ -1,5 +1,6 @@
 package io.github.swsk33.codepost.model.config;
 
+import io.github.swsk33.codepost.param.CodeGenerateMethod;
 import io.github.swsk33.codepost.param.CodeStorageMethod;
 import lombok.Data;
 
@@ -59,9 +60,19 @@ public class MailConfig {
 	private boolean enableSSL = true;
 
 	/**
+	 * 网站名（用于放入验证码邮件标题）
+	 */
+	private String siteName;
+
+	/**
 	 * 验证码的保存方式
 	 */
 	private String codeStorage = CodeStorageMethod.LOCAL_THREAD_POOL;
+
+	/**
+	 * 验证码的格式
+	 */
+	private String codeFormat = CodeGenerateMethod.NUMBER;
 
 	/**
 	 * 启用模板引擎发送HTML邮件（使用FreeMarker）
