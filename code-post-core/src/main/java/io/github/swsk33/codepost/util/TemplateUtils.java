@@ -65,6 +65,7 @@ public class TemplateUtils {
 	 */
 	public static String renderVerifyMailTemplate(String serviceNameKey, String code, long period, TimeUnit timeUnit) {
 		Map<String, Object> vars = new HashMap<>();
+		vars.put("siteName", MailConfig.getInstance().getSiteName());
 		vars.put("serviceName", ServiceNameContext.getServiceName(serviceNameKey));
 		vars.put("code", code);
 		vars.put("time", period + TIME_UNIT_NAME_MAP.get(timeUnit));
