@@ -52,6 +52,8 @@ public class EmailSendUtils {
 			} else {
 				message.setText(content, StandardCharsets.UTF_8.toString());
 			}
+			// 发送邮件
+			MailClientConfig.getTransport().sendMessage(message, message.getAllRecipients());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

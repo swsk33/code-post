@@ -1,0 +1,29 @@
+# 服务端配置
+server:
+  port: 8802
+
+# CodePost邮件配置
+io:
+  github:
+    swsk33:
+      code-post:
+        core:
+          smtp-host: "smtp.163.com"
+          email: "你的邮箱"
+          password: "你的邮箱密码（或者是授权码）"
+          enable-ssl: true
+          code-storage: "redis"
+          code-format: "number"
+          code-length: 6
+          site-name: "测试网站"
+          enable-html: false
+          template-path: "classpath:/templates"
+          code-template-name: "test-template.txt"
+
+# Spring Data Redis配置
+spring:
+  data:
+    redis:
+      host: "127.0.0.1"
+      port: 6379
+      password: "12345678"

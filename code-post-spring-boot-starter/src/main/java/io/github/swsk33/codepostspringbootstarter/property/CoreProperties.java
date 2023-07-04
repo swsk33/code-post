@@ -14,9 +14,24 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CoreProperties {
 
 	/**
+	 * SMTP服务器地址
+	 */
+	private String smtpHost;
+
+	/**
+	 * 发送者邮箱
+	 */
+	private String email;
+
+	/**
+	 * 发送者密码（或者授权码）
+	 */
+	private String password;
+
+	/**
 	 * 是否开启SSL加密
 	 */
-	private boolean enableSSL = true;
+	private boolean enableSsl = true;
 
 	/**
 	 * 验证码的保存方式
@@ -36,12 +51,12 @@ public class CoreProperties {
 	/**
 	 * 网站名
 	 */
-	private String siteName;
+	private String siteName = "网站名";
 
 	/**
 	 * 启用是否发送HTML邮件
 	 */
-	private boolean enableHTML = false;
+	private boolean enableHtml = false;
 
 	/**
 	 * 模板文件所在目录
@@ -62,12 +77,15 @@ public class CoreProperties {
 	 * @param mailConfig 传入邮件配置对象
 	 */
 	public void setMailConfig(MailConfig mailConfig) {
-		mailConfig.setEnableSSL(enableSSL);
+		mailConfig.setSMTPHost(smtpHost);
+		mailConfig.setEmail(email);
+		mailConfig.setPassword(password);
+		mailConfig.setEnableSSL(enableSsl);
 		mailConfig.setCodeStorage(codeStorage);
 		mailConfig.setCodeFormat(codeFormat);
 		mailConfig.setCodeLength(codeLength);
 		mailConfig.setSiteName(siteName);
-		mailConfig.setEnableHTML(enableHTML);
+		mailConfig.setEnableHTML(enableHtml);
 		mailConfig.setTemplatePath(templatePath);
 		mailConfig.setCodeTemplateName(codeTemplateName);
 	}

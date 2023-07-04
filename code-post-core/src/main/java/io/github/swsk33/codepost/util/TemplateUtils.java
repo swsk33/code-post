@@ -1,5 +1,6 @@
 package io.github.swsk33.codepost.util;
 
+import cn.hutool.core.util.StrUtil;
 import freemarker.template.Template;
 import io.github.swsk33.codepost.config.FreeMarkerLoaderConfig;
 import io.github.swsk33.codepost.context.ServiceNameContext;
@@ -70,7 +71,14 @@ public class TemplateUtils {
 		vars.put("serviceName", ServiceNameContext.getServiceName(serviceNameKey));
 		vars.put("code", code);
 		vars.put("time", period + TIME_UNIT_NAME_MAP.get(timeUnit));
-		return renderTemplate(vars, MailConfig.getInstance().getCodeTemplateName());
+		MailConfig mailConfig = MailConfig.getInstance();
+		String codeTemplateName = mailConfig.getCodeTemplateName();
+		// 如果模板文件名为空，说明未配置模板位置且模板引擎未初始化，先调用一次模板配置触发初始化操作
+		if (StrUtil.isEmpty(codeTemplateName)) {
+			FreeMarkerLoaderConfig.getConfiguration();
+			codeTemplateName = mailConfig.getCodeTemplateName();
+		}
+		return renderTemplate(vars, codeTemplateName);
 	}
 
 }

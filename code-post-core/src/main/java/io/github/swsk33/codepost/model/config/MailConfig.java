@@ -77,7 +77,7 @@ public class MailConfig {
 	/**
 	 * 网站名
 	 */
-	private String siteName;
+	private String siteName = "网站名";
 
 	/**
 	 * 启用是否发送HTML邮件

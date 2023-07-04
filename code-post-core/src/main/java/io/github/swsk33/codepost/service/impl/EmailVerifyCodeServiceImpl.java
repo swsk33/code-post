@@ -36,13 +36,18 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 	public void sendCode(String serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit) {
 		// 生成验证码
 		String code = CodeGenerateContext.generateCode(mailConfig.getCodeFormat(), mailConfig.getCodeLength());
-		// 暂存验证码
-		EmailCodeContext.saveCode(mailConfig.getCodeStorage(), generateCodeKey(serviceNameKey, userId), code, period, timeUnit);
 		// 渲染验证码模板
 		String mailContent = renderVerifyMailTemplate(serviceNameKey, code, period, timeUnit);
 		// 发送邮件
 		sendEmail(mailConfig.getSiteName() + " - " + ServiceNameContext.getServiceName(serviceNameKey), mailContent, new String[]{receiverEmail}, mailConfig.isEnableHTML());
+		// 暂存验证码
+		EmailCodeContext.saveCode(mailConfig.getCodeStorage(), generateCodeKey(serviceNameKey, userId), code, period, timeUnit);
 		log.info("已向" + receiverEmail + "发送验证码邮件！");
+	}
+
+	@Override
+	public void sendCode(Enum<?> serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit) {
+		sendCode(serviceNameKey.toString(), userId, receiverEmail, period, timeUnit);
 	}
 
 	@Override
@@ -53,6 +58,11 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 	@Override
 	public boolean verifyCode(String serviceNameKey, Object userId, String inputCode) {
 		return EmailCodeContext.verifyCode(mailConfig.getCodeStorage(), generateCodeKey(serviceNameKey, userId), inputCode);
+	}
+
+	@Override
+	public boolean verifyCode(Enum<?> serviceNameKey, Object userId, String inputCode) {
+		return verifyCode(serviceNameKey.toString(), userId, inputCode);
 	}
 
 }
