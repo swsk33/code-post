@@ -21,7 +21,7 @@ public class ServiceNameContext {
 
 	// 初始化默认服务
 	static {
-		SERVICE_NAME_MAP.put(DEFAULT_SERVICE_KEY, "验证码");
+		SERVICE_NAME_MAP.put(DEFAULT_SERVICE_KEY, "服务");
 	}
 
 	/**

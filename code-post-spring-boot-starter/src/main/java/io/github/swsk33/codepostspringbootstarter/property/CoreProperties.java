@@ -29,9 +29,9 @@ public class CoreProperties {
 	private String password;
 
 	/**
-	 * 是否开启SSL加密
+	 * 是否开启TLS加密
 	 */
-	private boolean enableSsl = true;
+	private boolean enableTls = true;
 
 	/**
 	 * 验证码的保存方式
@@ -80,7 +80,7 @@ public class CoreProperties {
 		mailConfig.setSMTPHost(smtpHost);
 		mailConfig.setEmail(email);
 		mailConfig.setPassword(password);
-		mailConfig.setEnableSSL(enableSsl);
+		mailConfig.setEnableTLS(enableTls);
 		mailConfig.setCodeStorage(codeStorage);
 		mailConfig.setCodeFormat(codeFormat);
 		mailConfig.setCodeLength(codeLength);

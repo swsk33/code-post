@@ -55,9 +55,9 @@ public class MailConfig {
 	private String password;
 
 	/**
-	 * 是否开启SSL加密
+	 * 是否启用TLS加密协议
 	 */
-	private boolean enableSSL = true;
+	private boolean enableTLS = true;
 
 	/**
 	 * 验证码的保存方式

@@ -13,7 +13,7 @@ public class CodeKeyUtils {
 	 * @return 验证码键
 	 */
 	public static String generateCodeKey(String serviceNameKey, Object userId) {
-		return "code-post:" + serviceNameKey + ":" + userId.toString();
+		return "code-post:" + serviceNameKey + ":" + (userId != null ? userId.toString() : "null");
 	}
 
 }

@@ -11,7 +11,7 @@ io:
           smtp-host: "smtp.163.com"
           email: "你的邮箱"
           password: "你的邮箱密码（或者是授权码）"
-          enable-ssl: true
+          enable-tls: true
           code-storage: "redis"
           code-format: "number"
           code-length: 6
