@@ -11,6 +11,7 @@
 	<!-- 需要构建的子模块 -->
 	<modules>
 		<module>code-post-core</module>
+		<module>code-post-spring-boot-starter</module>
 	</modules>
 
 	<properties>
@@ -116,6 +117,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-configuration-processor</artifactId>
 				<version>${spring.boot.starter.version}</version>
+			</dependency>
+
+			<!-- CodePost核心 -->
+			<dependency>
+				<groupId>io.github.swsk33</groupId>
+				<artifactId>code-post-core</artifactId>
+				<version>1.0.0</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

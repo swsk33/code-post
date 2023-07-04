@@ -34,24 +34,25 @@ public class TemplateUtils {
 	/**
 	 * 渲染模板
 	 *
-	 * @param variables        模板中的变量对应值的列表
+	 * @param variables        模板中的变量对应值的列表（没有变量可以传入null）
 	 * @param templateFileName 模板文件名（不是路径）
 	 * @return 渲染后的结果字符串，渲染失败则返回null
 	 */
 	public static String renderTemplate(Map<String, Object> variables, String templateFileName) {
-		String result = null;
+		if (variables == null) {
+			variables = new HashMap<>();
+		}
 		// 创建字符串写入器
 		try (StringWriter stringWriter = new StringWriter()) {
 			// 获取模板对象
 			Template template = FreeMarkerLoaderConfig.getConfiguration().getTemplate(templateFileName);
 			// 渲染模板，并通过写入器将结果写入流
 			template.process(variables, stringWriter);
-			// 获取流中的对象
-			result = stringWriter.toString();
+			// 获取结果并返回
+			return stringWriter.toString();
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		return result;
 	}
 
 	/**
