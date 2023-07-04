@@ -2,7 +2,7 @@ package io.github.swsk33.codepostspringbootstarter.autoconfigure.config;
 
 import io.github.swsk33.codepost.model.config.RedisClientConfig;
 import io.github.swsk33.codepost.param.CodeStorageMethod;
-import io.github.swsk33.codepostspringbootstarter.autoconfigure.CodeMailServiceAutoConfiguration;
+import io.github.swsk33.codepostspringbootstarter.autoconfigure.MailServiceAutoConfiguration;
 import io.github.swsk33.codepostspringbootstarter.property.RedisConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties(RedisConfig.class)
-@AutoConfigureBefore(CodeMailServiceAutoConfiguration.class)
+@AutoConfigureBefore(MailServiceAutoConfiguration.class)
 @ConditionalOnProperty(prefix = "io.github.swsk33.code-post.core", value = "code-storage", havingValue = CodeStorageMethod.REDIS)
 public class RedisConfigAutoConfiguration {
 

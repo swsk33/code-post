@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties(CoreProperties.class)
-public class CodeMailServiceAutoConfiguration {
+public class MailServiceAutoConfiguration {
 
 	/**
 	 * 自动配置邮件验证码服务类

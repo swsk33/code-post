@@ -2,7 +2,7 @@ package io.github.swsk33.codepostspringbootstarter.autoconfigure.config;
 
 import io.github.swsk33.codepost.model.config.MailConfig;
 import io.github.swsk33.codepost.param.CodeStorageMethod;
-import io.github.swsk33.codepostspringbootstarter.autoconfigure.CodeMailServiceAutoConfiguration;
+import io.github.swsk33.codepostspringbootstarter.autoconfigure.MailServiceAutoConfiguration;
 import io.github.swsk33.codepostspringbootstarter.property.CoreProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 @EnableConfigurationProperties(CoreProperties.class)
-@AutoConfigureBefore(CodeMailServiceAutoConfiguration.class)
+@AutoConfigureBefore(MailServiceAutoConfiguration.class)
 public class MailConfigAutoConfiguration {
 
 	/**

@@ -16,7 +16,7 @@ io:
           code-format: "number"
           code-length: 6
           site-name: "测试网站"
-          enable-html: false
+          enable-html: true
           template-path: "classpath:/templates"
           code-template-name: "test-template.txt"
 
