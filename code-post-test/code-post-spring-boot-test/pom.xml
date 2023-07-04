@@ -11,7 +11,13 @@
 	<description>CodePost的Spring Boot测试</description>
 
 	<dependencies>
-		<!-- Spring Web -->
+		<!-- Spring Boot Starter -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 配置Redis客户端配置的Bean -->
+	<bean id="redisClientConfig" class="io.github.swsk33.codepostcore.model.config.RedisClientConfig" factory-method="getInstance">
+		<!-- Redis服务器地址 -->
+		<property name="host" value="127.0.0.1"/>
+		<!-- Redis服务器端口 -->
+		<property name="port" value="6379"/>
+		<!-- Redis服务器密码 -->
+		<property name="password" value="123456"/>
+	</bean>
+</beans>

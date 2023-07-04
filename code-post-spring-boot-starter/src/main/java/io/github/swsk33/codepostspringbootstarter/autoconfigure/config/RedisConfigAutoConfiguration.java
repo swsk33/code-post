@@ -1,7 +1,7 @@
 package io.github.swsk33.codepostspringbootstarter.autoconfigure.config;
 
-import io.github.swsk33.codepost.model.config.RedisClientConfig;
-import io.github.swsk33.codepost.param.CodeStorageMethod;
+import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
+import io.github.swsk33.codepostcore.param.CodeStorageMethod;
 import io.github.swsk33.codepostspringbootstarter.autoconfigure.MailServiceAutoConfiguration;
 import io.github.swsk33.codepostspringbootstarter.property.RedisConfig;
 import lombok.extern.slf4j.Slf4j;

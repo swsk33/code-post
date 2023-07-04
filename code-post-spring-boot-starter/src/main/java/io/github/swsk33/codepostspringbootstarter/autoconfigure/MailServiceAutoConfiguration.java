@@ -1,10 +1,10 @@
 package io.github.swsk33.codepostspringbootstarter.autoconfigure;
 
-import io.github.swsk33.codepost.model.config.MailConfig;
-import io.github.swsk33.codepost.service.EmailNotifyService;
-import io.github.swsk33.codepost.service.EmailVerifyCodeService;
-import io.github.swsk33.codepost.service.impl.EmailNotifyServiceImpl;
-import io.github.swsk33.codepost.service.impl.EmailVerifyCodeServiceImpl;
+import io.github.swsk33.codepostcore.model.config.MailConfig;
+import io.github.swsk33.codepostcore.service.EmailNotifyService;
+import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
+import io.github.swsk33.codepostcore.service.impl.EmailNotifyServiceImpl;
+import io.github.swsk33.codepostcore.service.impl.EmailVerifyCodeServiceImpl;
 import io.github.swsk33.codepostspringbootstarter.property.CoreProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

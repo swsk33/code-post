@@ -1,6 +1,6 @@
 package io.github.swsk33.codepostspringbootstarter.property;
 
-import io.github.swsk33.codepost.model.config.RedisClientConfig;
+import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

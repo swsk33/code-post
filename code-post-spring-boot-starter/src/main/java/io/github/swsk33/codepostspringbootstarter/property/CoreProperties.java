@@ -1,8 +1,8 @@
 package io.github.swsk33.codepostspringbootstarter.property;
 
-import io.github.swsk33.codepost.model.config.MailConfig;
-import io.github.swsk33.codepost.param.CodeGenerateMethod;
-import io.github.swsk33.codepost.param.CodeStorageMethod;
+import io.github.swsk33.codepostcore.model.config.MailConfig;
+import io.github.swsk33.codepostcore.param.CodeGenerateMethod;
+import io.github.swsk33.codepostcore.param.CodeStorageMethod;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

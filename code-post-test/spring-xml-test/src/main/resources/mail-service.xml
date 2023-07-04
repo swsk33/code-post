@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 定义邮件服务配置Bean -->
+	<bean id="mailConfig" class="io.github.swsk33.codepostcore.model.config.MailConfig" factory-method="getInstance">
+		<!-- 发件邮箱的SMTP服务器地址 -->
+		<property name="SMTPHost" value="邮箱SMTP服务器"/>
+		<!-- 用于发件的邮箱 -->
+		<property name="email" value="你的邮箱"/>
+		<!-- 发件邮箱授权码或者密码 -->
+		<property name="password" value="邮箱密码或者授权码"/>
+		<!-- 是否开启TLS安全加密 -->
+		<property name="enableTLS" value="true"/>
+		<!-- 验证码储存和过期管理方式 -->
+		<property name="codeStorage" value="thread_pool"/>
+		<!-- 验证码格式 -->
+		<property name="codeFormat" value="number"/>
+		<!-- 验证码长度 -->
+		<property name="codeLength" value="6"/>
+		<!-- 网站名 -->
+		<property name="siteName" value="网站名"/>
+		<!-- 是否使用HTML网页邮件 -->
+		<property name="enableHTML" value="false"/>
+		<!-- 邮件模板目录 -->
+		<property name="templatePath" value="classpath:/templates"/>
+		<!-- 验证码邮件模板文件名 -->
+		<property name="codeTemplateName" value="code.ftlh"/>
+	</bean>
+
+	<!-- 配置邮件验证码服务Bean -->
+	<bean id="emailVerifyCodeService" class="io.github.swsk33.codepostcore.service.impl.EmailVerifyCodeServiceImpl">
+		<property name="mailConfig" ref="mailConfig"/>
+	</bean>
+
+	<!-- 配置邮件通知服务Bean -->
+	<bean id="emailNotifyService" class="io.github.swsk33.codepostcore.service.impl.EmailNotifyServiceImpl">
+		<property name="mailConfig" ref="mailConfig"/>
+	</bean>
+</beans>
