@@ -9,6 +9,7 @@
 	<artifactId>code-post-core</artifactId>
 	<name>CodePost - Core</name>
 	<description>CodePost框架核心代码</description>
+	<url>https://github.com/swsk33/code-post</url>
 
 	<dependencies>
 		<!-- Hutool实用工具 -->

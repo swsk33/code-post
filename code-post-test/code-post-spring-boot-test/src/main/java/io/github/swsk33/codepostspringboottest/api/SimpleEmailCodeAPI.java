@@ -31,6 +31,8 @@ public class SimpleEmailCodeAPI {
 	 */
 	@GetMapping("/send/mail/{email}/user-id/{userId}")
 	public String sendCode(@PathVariable String email, @PathVariable int userId) {
+		// 调用sendCode方法即可一键完成验证码生成发送操作
+		// 参数分别是：邮箱对应的用户id、用户邮箱、验证码有效时长、验证码有效时长单位
 		emailVerifyCodeService.sendCode(userId, email, 1, TimeUnit.MINUTES);
 		return "已发送验证码！";
 	}
@@ -44,6 +46,9 @@ public class SimpleEmailCodeAPI {
 	 */
 	@GetMapping("/verify/user-id/{userId}/code/{inputCode}")
 	public String verifyCode(@PathVariable int userId, @PathVariable String inputCode) {
+		// 调用verifyCode方法即可一键完成验证码校验操作
+		// 参数分别是：邮箱对应的用户id、用户传入的验证码（用于校验）
+		// 校验成功返回true，并且验证码也会立即失效
 		boolean result = emailVerifyCodeService.verifyCode(userId, inputCode);
 		return result ? "校验成功！" : "验证码错误或者不存在！";
 	}

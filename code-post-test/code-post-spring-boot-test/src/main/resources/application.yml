@@ -35,7 +35,7 @@ io:
           code-length: 6
           # 你的网站名（会在验证码邮件标题显示）
           # 默认：网站名
-          site-name: "测试网站"
+          site-name: "xxx博客"
           # 是否使用HTML网页邮件
           # 默认：false
           enable-html: false

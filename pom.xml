@@ -7,6 +7,7 @@
 	<packaging>pom</packaging>
 	<name>CodePost - Parent</name>
 	<description>CodePost是一个简单的邮件验证码生成和发送框架，用于简化后端服务中生成、发送和验证邮件验证码的逻辑</description>
+	<url>https://github.com/swsk33/code-post</url>
 
 	<!-- 需要构建的子模块 -->
 	<modules>

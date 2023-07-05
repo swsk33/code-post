@@ -9,6 +9,7 @@
 	<artifactId>code-post-spring-boot-starter</artifactId>
 	<name>CodePost - Spring Boot Starter</name>
 	<description>CodePost的Spring Boot Starter</description>
+	<url>https://github.com/swsk33/code-post</url>
 
 	<dependencies>
 		<!-- Spring Boot Starter支持 -->
