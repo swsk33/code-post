@@ -38,12 +38,12 @@ io:
           site-name: "xxx博客"
           # 是否使用HTML网页邮件
           # 默认：false
-          enable-html: false
-          # 模板文件所在目录 需要以file:或者classpath:开头，分别代表文件系统路径或者类路径
+          enable-html: true
+          # 模板文件所在目录，需要以file:或者classpath:开头，分别代表文件系统路径或者类路径
           template-path: "classpath:templates"
           # 用于邮件验证码内容的模板文件名（该项只填写文件名！该配置项会和templatePath配置值拼接得到完整文件路径）
           # 若不配置template-path和code-template-name或者配置模板路径不存在，则发送验证码邮件时会使用内置默认模板
-          code-template-name: "test-template.txt"
+          code-template-name: "test-template.ftlh"
 
 # Spring Data Redis配置
 spring:

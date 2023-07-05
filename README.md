@@ -1,5 +1,18 @@
 # CodePost-小型邮件验证码框架
 
+<p align="center">
+	<a target="_blank" href="https://central.sonatype.com/search?smo=true&q=io.github.swsk33.code-post">
+		<img src="https://img.shields.io/maven-central/v/io.github.swsk33/code-post-parent
+" />
+	</a>
+	<a target="_blank" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">
+		<img alt="GitHub" src="https://img.shields.io/github/license/swsk33/code-post">
+	</a>
+	<a target="_blank" href="https://www.azul.com/downloads/#downloads-table-zulu">
+		<img alt="Static Badge" src="https://img.shields.io/badge/17%2B-blue?label=JDK">
+	</a>
+</p>
+
 ## 1，介绍
 CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的生成、发送和校验等功能做了封装，使得开发者能够更加简单地完成邮件验证码功能。
 
@@ -175,4 +188,5 @@ public class SimpleEmailCodeAPI {
 
 - 详细文档：[传送门](./code-post-doc/主要文档.md)
 - 配置参考：[传送门](./code-post-doc/配置参考.md)
-- API文档：[传送门](https://apidoc.gitee.com/swsk33/code-post/)
+- 一些示例程序：[传送门](https://github.com/swsk33/code-post/tree/master/code-post-test)
+- API文档：[传送门](https://apidoc.gitee.com/swsk33/code-post)
