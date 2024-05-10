@@ -35,12 +35,6 @@ public class RedisSentinelConfig extends RedisClientConfig {
 	private String masterName;
 
 	/**
-	 * 配置哨兵密码
-	 * 若哨兵密码和主节点密码相同，则只配置主节点密码即可，此时该项可省略
-	 */
-	private String sentinelPassword;
-
-	/**
 	 * 指定全部哨兵节点的地址和端口，每个地址端口之间使用逗号隔开<br>
 	 * 例如：127.0.0.1:7000,127.0.0.1:7001,127.0.0.1:7002
 	 */

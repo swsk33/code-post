@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("/mail-service.xml", "/redis-config.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("/mail-service.xml", "/redis-cluster-config.xml");
 		EmailVerifyCodeService verifyCodeService = context.getBean(EmailVerifyCodeService.class);
 		EmailNotifyService notifyService = context.getBean(EmailNotifyService.class);
 		System.out.println(verifyCodeService != null);

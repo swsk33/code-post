@@ -1,11 +1,11 @@
 package io.github.swsk33.codepostspringboottest.api;
 
 import io.github.swsk33.codepostcore.service.EmailNotifyService;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -1,0 +1,4 @@
+网站：${siteName}
+服务：${serviceName}
+验证码：${code}
+有效时间：${time}

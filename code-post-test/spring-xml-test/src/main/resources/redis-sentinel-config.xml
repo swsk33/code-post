@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 配置Redis客户端配置的Bean -->
+	<!-- 连接到哨兵集群 -->
+	<bean id="redisSentinelConfig" class="io.github.swsk33.codepostcore.model.config.RedisSentinelConfig" factory-method="getInstance">
+		<!-- Redis主节点名称 -->
+		<property name="masterName" value="my-master"/>
+		<!-- Redis哨兵地址列表 -->
+		<property name="nodes" value="127.0.0.1:7000,127.0.0.1:7001"/>
+		<!-- Redis主节点密码 -->
+		<property name="password" value="123456"/>
+		<!-- Redis哨兵密码 -->
+		<property name="sentinelPassword" value="789101112"/>
+	</bean>
+</beans>

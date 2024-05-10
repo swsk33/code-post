@@ -3,7 +3,6 @@ package io.github.swsk33.codepostspringboottest.api;
 import io.github.swsk33.codepostcore.context.ServiceNameContext;
 import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
 import io.github.swsk33.codepostspringboottest.param.EmailService;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
 /**

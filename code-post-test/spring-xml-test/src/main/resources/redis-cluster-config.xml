@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 连接到Cluster分片集群 -->
+	<bean id="redisClusterConfig" class="io.github.swsk33.codepostcore.model.config.RedisClusterConfig" factory-method="getInstance">
+		<!-- Redis分片集群节点列表 -->
+		<property name="nodes" value="127.0.0.1:8001,127.0.0.1:8002,127.0.0.1:8003,127.0.0.1:8004,127.0.0.1:8005,127.0.0.1:8006"/>
+		<!-- Redis密码 -->
+		<property name="password" value="123456"/>
+	</bean>
+</beans>

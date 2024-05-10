@@ -43,7 +43,6 @@ public class RedisConfigAutoConfiguration {
 			RedisSentinelConfig sentinelConfig = RedisSentinelConfig.getInstance();
 			sentinelConfig.setMasterName(redisProperties.getSentinel().getMaster());
 			sentinelConfig.setPassword(redisProperties.getPassword());
-			sentinelConfig.setSentinelPassword(redisProperties.getSentinel().getPassword());
 			sentinelConfig.setNodes(String.join(",", redisProperties.getSentinel().getNodes()));
 			return sentinelConfig;
 		}

@@ -47,16 +47,15 @@ io:
 
 # Spring Data Redis配置
 spring:
-  data:
-    redis:
-      # 单机
-      host: "${REDIS_HOST}"
-      port: ${REDIS_PORT}
-      password: "${REDIS_PASSWORD}"
-      # 哨兵
-      sentinel:
-        master: "my-master"
-        nodes: "202.114.148.161:7003,202.114.148.161:7004,202.114.148.161:7005"
-      # Cluster分片
-#      cluster:
-#        nodes: "202.114.148.161:8001,202.114.148.161:8002,202.114.148.161:8003,202.114.148.161:8004,202.114.148.161:8005,202.114.148.161:8006"
+  redis:
+    # 单机
+    host: "${REDIS_HOST}"
+    port: ${REDIS_PORT}
+    password: "${REDIS_PASSWORD}"
+    # 哨兵
+    #    sentinel:
+    #      master: "my-master"
+    #      nodes: "202.114.148.161:7003,202.114.148.161:7004,202.114.148.161:7005"
+    # Cluster分片
+    cluster:
+      nodes: "202.114.148.161:8001,202.114.148.161:8002,202.114.148.161:8003,202.114.148.161:8004,202.114.148.161:8005,202.114.148.161:8006"

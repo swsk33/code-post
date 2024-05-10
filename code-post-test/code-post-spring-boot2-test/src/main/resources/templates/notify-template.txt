@@ -1,0 +1,5 @@
+您的专栏：《${anthologyName}》今天更新了！
+新增文章：
+<#list newArticles as item>
+	- ${item}
+</#list>

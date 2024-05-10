@@ -12,6 +12,7 @@
 	<description>CodePost的测试父模块</description>
 
 	<modules>
+		<module>code-post-spring-boot2-test</module>
 		<module>code-post-spring-boot3-test</module>
 		<module>spring-xml-test</module>
 	</modules>

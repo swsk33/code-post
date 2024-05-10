@@ -88,27 +88,6 @@
 				<version>6.3.2.RELEASE</version>
 			</dependency>
 
-			<!-- Slf4J API -->
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-api</artifactId>
-				<version>2.0.13</version>
-			</dependency>
-
-			<!-- Spring Boot Starter支持 -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter</artifactId>
-				<version>${spring.boot.starter.version}</version>
-			</dependency>
-
-			<!-- Spring Boot配置生成器 -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-configuration-processor</artifactId>
-				<version>${spring.boot.starter.version}</version>
-			</dependency>
-
 			<!-- CodePost核心 -->
 			<dependency>
 				<groupId>io.github.swsk33</groupId>

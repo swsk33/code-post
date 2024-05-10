@@ -74,9 +74,11 @@ public class LettuceConnectionResource {
 		if (config instanceof RedisStandaloneConfig) {
 			RedisStandaloneConfig standaloneConfig = (RedisStandaloneConfig) config;
 			StringBuilder redisURL = new StringBuilder("redis://");
+			// 处理密码
 			if (!StrUtil.isEmpty(config.getPassword())) {
 				redisURL.append(URLEncodeUtils.percentEncode(config.getPassword())).append("@");
 			}
+			// 追加地址
 			redisURL.append(standaloneConfig.getHost()).append(":").append(standaloneConfig.getPort());
 			// 创建客户端
 			RedisClient redisClient = RedisClient.create(redisURL.toString());
@@ -92,10 +94,11 @@ public class LettuceConnectionResource {
 		if (config instanceof RedisSentinelConfig) {
 			RedisSentinelConfig sentinelConfig = (RedisSentinelConfig) config;
 			StringBuilder redisURL = new StringBuilder("redis-sentinel://");
-			String password = StrUtil.isEmpty(sentinelConfig.getSentinelPassword()) ? sentinelConfig.getPassword() : sentinelConfig.getSentinelPassword();
-			if (!StrUtil.isEmpty(password)) {
-				redisURL.append(URLEncodeUtils.percentEncode(password)).append("@");
+			// 处理密码
+			if (!StrUtil.isEmpty(sentinelConfig.getPassword())) {
+				redisURL.append(URLEncodeUtils.percentEncode(sentinelConfig.getPassword())).append("@");
 			}
+			// 追加地址
 			redisURL.append(sentinelConfig.getNodes()).append("?sentinelMasterId=").append(sentinelConfig.getMasterName());
 			RedisURI uri = RedisURI.create(redisURL.toString());
 			// 创建客户端
