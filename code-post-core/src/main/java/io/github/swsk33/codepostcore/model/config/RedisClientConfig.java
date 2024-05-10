@@ -3,15 +3,16 @@ package io.github.swsk33.codepostcore.model.config;
 import lombok.Data;
 
 /**
- * Redis客户端配置（使用Redis存放验证码时）
+ * Redis客户端配置抽象类（使用Redis存放验证码时）
  */
 @Data
-public class RedisClientConfig {
+public abstract class RedisClientConfig {
 
 	/**
 	 * 唯一单例
+	 * 延迟初始化函数位于子类，第一次配置时请先通过对应子类进行调用
 	 */
-	private static volatile RedisClientConfig INSTANCE;
+	protected static volatile RedisClientConfig INSTANCE;
 
 	/**
 	 * 获取Redis客户端配置唯一单例
@@ -21,34 +22,13 @@ public class RedisClientConfig {
 	public static RedisClientConfig getInstance() {
 		// 双检锁延迟初始化
 		if (INSTANCE == null) {
-			synchronized (RedisClientConfig.class) {
-				if (INSTANCE == null) {
-					INSTANCE = new RedisClientConfig();
-				}
-			}
+			throw new RuntimeException("请先调用任意一子类的getInstance初始化单例！");
 		}
 		return INSTANCE;
 	}
 
 	/**
-	 * 私有化构造器
-	 */
-	private RedisClientConfig() {
-
-	}
-
-	/**
-	 * Redis地址
-	 */
-	private String host;
-
-	/**
-	 * Redis端口
-	 */
-	private int port = 6379;
-
-	/**
-	 * Redis密码
+	 * Redis（主节点）密码
 	 */
 	private String password;
 

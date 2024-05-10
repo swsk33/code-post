@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+io.github.swsk33.codepostspringbootstarter.autoconfigure.MailServiceAutoConfiguration,\
+io.github.swsk33.codepostspringbootstarter.autoconfigure.config.MailConfigAutoConfiguration,\
+io.github.swsk33.codepostspringbootstarter.autoconfigure.config.storage.RedisConfigAutoConfiguration

@@ -1,10 +1,8 @@
 package io.github.swsk33.codepostcore.config;
 
-import cn.hutool.core.util.StrUtil;
+import io.github.swsk33.codepostcore.model.LettuceConnectionResource;
 import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
-import io.github.swsk33.codepostcore.util.URLEncodeUtils;
-import io.lettuce.core.RedisClient;
-import io.lettuce.core.api.async.RedisAsyncCommands;
+import io.lettuce.core.api.sync.BaseRedisCommands;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -14,38 +12,25 @@ import lombok.extern.slf4j.Slf4j;
 public class LettuceClientConfig {
 
 	/**
-	 * Redis客户端对象
+	 * Lettuce连接资源对象
 	 */
-	private static volatile RedisClient client;
+	private static volatile LettuceConnectionResource connectionResource;
 
 	/**
-	 * 用于执行Redis命令的对象
-	 */
-	private static RedisAsyncCommands<String, String> commands;
-
-	/**
-	 * 获取Redis连接客户端
+	 * 获取Redis连接资源对象
 	 *
-	 * @return 连接客户端对象
+	 * @return 连接资源对象
 	 */
-	private static RedisClient getClient() {
+	private static LettuceConnectionResource getConnection() {
 		// 双检锁延迟初始化
-		if (client == null) {
+		if (connectionResource == null) {
 			synchronized (LettuceClientConfig.class) {
-				if (client == null) {
-					// 读取配置的连接地址
-					RedisClientConfig config = RedisClientConfig.getInstance();
-					StringBuilder redisURL = new StringBuilder("redis://");
-					if (!StrUtil.isEmpty(config.getPassword())) {
-						redisURL.append(URLEncodeUtils.percentEncode(config.getPassword())).append("@");
-					}
-					redisURL.append(config.getHost()).append(":").append(config.getPort());
-					// 创建客户端
-					client = RedisClient.create(redisURL.toString());
+				if (connectionResource == null) {
+					connectionResource = new LettuceConnectionResource(RedisClientConfig.getInstance());
 				}
 			}
 		}
-		return client;
+		return connectionResource;
 	}
 
 	/**
@@ -53,12 +38,8 @@ public class LettuceClientConfig {
 	 *
 	 * @return Redis命令对象
 	 */
-	public static RedisAsyncCommands<String, String> getCommands() {
-		if (commands == null) {
-			commands = getClient().connect().async();
-			log.info("Redis连接已建立！");
-		}
-		return commands;
+	public static BaseRedisCommands<String, String> getCommands() {
+		return getConnection().getCommands();
 	}
 
 }

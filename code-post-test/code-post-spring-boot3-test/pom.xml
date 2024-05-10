@@ -3,12 +3,12 @@
 	<parent>
 		<artifactId>code-post-test</artifactId>
 		<groupId>io.github.swsk33</groupId>
-		<version>1.0.0</version>
+		<version>1.1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>code-post-spring-boot-test</artifactId>
-	<name>CodePost - Spring Boot Test</name>
-	<description>CodePost的Spring Boot测试</description>
+	<artifactId>code-post-spring-boot3-test</artifactId>
+	<name>CodePost - Spring Boot 3.x Test</name>
+	<description>CodePost的Spring Boot 3.x测试</description>
 
 	<dependencies>
 		<!-- Spring Boot Starter -->
@@ -35,4 +35,17 @@
 			<artifactId>code-post-spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- 测试用Spring Boot版本管理 -->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot3.test.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

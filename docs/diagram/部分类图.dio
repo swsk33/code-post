@@ -1,0 +1,118 @@
+<mxfile host="Electron" modified="2024-05-10T03:30:24.097Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="1JRQLtZMWlhFoeNLmgxr" version="24.2.5" type="device">
+  <diagram name="配置类" id="Qa2K5EedsoL5Jt3pOtxn">
+    <mxGraphModel dx="263" dy="390" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="#CCFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-1" value="MailConfig" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="421" y="309" width="175" height="312" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-2" value="- SMTPHost String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="26" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-4" value="- email String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="52" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-5" value="- password String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="78" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-6" value="- enableTLS String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="104" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-7" value="- codeStorage String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="130" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-8" value="- codeFormat String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="156" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-9" value="- codeLength int" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="182" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-10" value="- siteName String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="208" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-11" value="- enableHTML boolean" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="234" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-12" value="- templatePath String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="260" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-13" value="- codeTemplateName String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-1" vertex="1">
+          <mxGeometry y="286" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-14" value="邮件发送配置" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="421" y="283" width="90" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-15" value="&lt;i&gt;RedisClientConfig&lt;/i&gt;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
+          <mxGeometry x="642" y="426" width="175" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-18" value="- password String" style="text;strokeColor=#9673a6;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-15" vertex="1">
+          <mxGeometry y="26" width="175" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-27" value="Redis客户端配置抽象类" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="642" y="400" width="145" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=0;" parent="1" source="o5WDj3EkV3XwLdwwBEam-28" target="o5WDj3EkV3XwLdwwBEam-15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="345" />
+              <mxPoint x="870" y="452" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-28" value="RedisStandaloneConfig" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="904" y="306" width="179" height="78" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-38" value="- host String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-28" vertex="1">
+          <mxGeometry y="26" width="179" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-39" value="- port int" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-28" vertex="1">
+          <mxGeometry y="52" width="179" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=0;" parent="1" source="o5WDj3EkV3XwLdwwBEam-41" target="o5WDj3EkV3XwLdwwBEam-18" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="862" y="452" />
+              <mxPoint x="862" y="452" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-41" value="RedisSentinelConfig" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="904" y="413" width="164" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-42" value="- masterName String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-41" vertex="1">
+          <mxGeometry y="26" width="164" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="JS3WtPZuW8s0aRBatGLK-1" value="- sentinelPassword String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" vertex="1" parent="o5WDj3EkV3XwLdwwBEam-41">
+          <mxGeometry y="52" width="164" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-43" value="- nodes String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-41" vertex="1">
+          <mxGeometry y="78" width="164" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=default;labelBackgroundColor=default;endArrow=block;endFill=0;" parent="1" source="o5WDj3EkV3XwLdwwBEam-45" target="o5WDj3EkV3XwLdwwBEam-15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="584" />
+              <mxPoint x="870" y="452" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-45" value="RedisClusterConfig" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" parent="1" vertex="1">
+          <mxGeometry x="904" y="556" width="154" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-46" value="- nodes String" style="text;strokeColor=#d79b00;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;" parent="o5WDj3EkV3XwLdwwBEam-45" vertex="1">
+          <mxGeometry y="26" width="154" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-52" value="Redis单机连接配置" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="904" y="280" width="121" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-53" value="Redis哨兵连接配置" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="904" y="387" width="121" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="o5WDj3EkV3XwLdwwBEam-54" value="Redis Cluster连接配置" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="904" y="530" width="138" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

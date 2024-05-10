@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>code-post-parent</artifactId>
 		<groupId>io.github.swsk33</groupId>
-		<version>1.0.0</version>
+		<version>1.1.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>code-post-test</artifactId>
@@ -12,51 +12,23 @@
 	<description>CodePost的测试父模块</description>
 
 	<modules>
-		<module>code-post-spring-boot-test</module>
+		<module>code-post-spring-boot3-test</module>
 		<module>spring-xml-test</module>
-		<module>spring-annotation-test</module>
 	</modules>
 
 	<properties>
-		<spring.test.version>6.0.10</spring.test.version>
-		<spring.boot.test.version>3.1.1</spring.boot.test.version>
+		<spring.test.version>6.1.4</spring.test.version>
+		<spring.boot2.test.version>2.7.12</spring.boot2.test.version>
+		<spring.boot3.test.version>3.2.5</spring.boot3.test.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- Spring Boot Starter -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter</artifactId>
-				<version>${spring.boot.test.version}</version>
-			</dependency>
-
-			<!-- Spring Web -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-web</artifactId>
-				<version>${spring.boot.test.version}</version>
-			</dependency>
-
-			<!-- Spring Boot Redis -->
-			<dependency>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-starter-data-redis</artifactId>
-				<version>${spring.boot.test.version}</version>
-			</dependency>
-
-			<!-- Spring上下文 -->
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-context</artifactId>
-				<version>${spring.test.version}</version>
-			</dependency>
-
 			<!-- CodePost Spring Boot Starter -->
 			<dependency>
 				<groupId>io.github.swsk33</groupId>
 				<artifactId>code-post-spring-boot-starter</artifactId>
-				<version>1.0.0</version>
+				<version>${code-post.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

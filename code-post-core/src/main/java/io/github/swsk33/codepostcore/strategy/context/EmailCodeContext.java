@@ -16,14 +16,14 @@ import java.util.concurrent.TimeUnit;
 public class EmailCodeContext {
 
 	/**
-	 * 存放邮件策略的哈希表
+	 * 当前所使用的邮件验证码存放策略（懒加载）
 	 */
-	private static volatile Map<String, EmailCodeStrategy> emailCodeStrategyMap = new ConcurrentHashMap<>();
+	private static volatile EmailCodeStrategy currentStrategy;
 
 	/**
 	 * 存放策略名称对应策略类的哈希表，用于延迟初始化
 	 */
-	private static Map<String, Class<?>> strategyClassMap = new ConcurrentHashMap<>();
+	private static final Map<String, Class<?>> strategyClassMap = new ConcurrentHashMap<>();
 
 	// 初始化策略名称对应的策略类列表
 	static {
@@ -38,24 +38,25 @@ public class EmailCodeContext {
 	 * @return 策略对象
 	 */
 	private static EmailCodeStrategy getStrategy(String method) {
-		// 如果传入方法名位于常量列表但是不在策略哈希表中，说明需要初始化
+		// 如果当前策略为空，说明需要初始化
 		// 使用双检锁延迟初始化
-		if (ConstantClassUtils.contains(CodeStorageMethod.class, method) && !emailCodeStrategyMap.containsKey(method)) {
+		if (currentStrategy == null) {
 			synchronized (EmailCodeContext.class) {
-				if (!emailCodeStrategyMap.containsKey(method)) {
-					try {
-						emailCodeStrategyMap.put(method, (EmailCodeStrategy) strategyClassMap.get(method).getConstructor().newInstance());
-					} catch (Exception e) {
-						e.printStackTrace();
+				if (currentStrategy == null) {
+					// 如果用户传入了错误配置，则使用默认策略
+					if (!ConstantClassUtils.contains(CodeStorageMethod.class, method)) {
+						currentStrategy = new ThreadPoolCodeStrategy();
+					} else {
+						try {
+							currentStrategy = (EmailCodeStrategy) strategyClassMap.get(method).getConstructor().newInstance();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
 		}
-		// 否则，就是用户传入了错误配置，执行默认策略
-		if (!emailCodeStrategyMap.containsKey(method)) {
-			return emailCodeStrategyMap.get(CodeStorageMethod.LOCAL_THREAD_POOL);
-		}
-		return emailCodeStrategyMap.get(method);
+		return currentStrategy;
 	}
 
 	/**

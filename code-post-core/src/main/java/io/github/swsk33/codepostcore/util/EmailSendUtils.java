@@ -11,7 +11,7 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.util.ByteArrayDataSource;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,15 +34,14 @@ public class EmailSendUtils {
 			// 设定发件人
 			message.setFrom(MailConfig.getInstance().getEmail());
 			// 收件人列表
-			List<Address> addressList = Arrays.stream(receivers).map(receiver -> {
-				Address address;
+			List<Address> addressList = new ArrayList<>();
+			for (String receiver : receivers) {
 				try {
-					address = new InternetAddress(receiver);
+					addressList.add(new InternetAddress(receiver));
 				} catch (Exception e) {
 					throw new RuntimeException(e);
 				}
-				return address;
-			}).toList();
+			}
 			// 设定收件人列表
 			message.setRecipients(Message.RecipientType.TO, ArrayUtil.toArray(addressList, Address.class));
 			// 设定邮件标题和内容

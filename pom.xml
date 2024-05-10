@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.swsk33</groupId>
 	<artifactId>code-post-parent</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<packaging>pom</packaging>
 	<name>CodePost - Parent</name>
 	<description>CodePost是一个简单的邮件验证码生成和发送框架，用于简化后端服务中生成、发送和验证邮件验证码的逻辑</description>
@@ -16,11 +16,12 @@
 	</modules>
 
 	<properties>
-		<java.version>17</java.version>
+		<java.version>1.8</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.boot.starter.version>3.0.0</spring.boot.starter.version>
+		<spring.boot.starter.version>2.7.11</spring.boot.starter.version>
+		<code-post.version>1.1.0</code-post.version>
 	</properties>
 
 	<licenses>
@@ -45,25 +46,13 @@
 		</developer>
 	</developers>
 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-
-		<repository>
-			<id>ossrh</id>
-			<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
-
 	<!-- 公用依赖 -->
 	<dependencies>
 		<!-- Lombok注解支持 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.28</version>
+			<version>1.18.32</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -75,14 +64,14 @@
 			<dependency>
 				<groupId>cn.hutool</groupId>
 				<artifactId>hutool-all</artifactId>
-				<version>5.8.20</version>
+				<version>5.8.27</version>
 			</dependency>
 
 			<!-- Jakarta Mail邮件支持，包含Jakarta Mail API及其实现类Angus Mail（原JavaEE Mail） -->
 			<dependency>
 				<groupId>org.eclipse.angus</groupId>
 				<artifactId>jakarta.mail</artifactId>
-				<version>2.0.2</version>
+				<version>2.0.3</version>
 			</dependency>
 
 			<!-- FreeMarker模板渲染器 -->
@@ -96,14 +85,14 @@
 			<dependency>
 				<groupId>io.lettuce</groupId>
 				<artifactId>lettuce-core</artifactId>
-				<version>6.2.4.RELEASE</version>
+				<version>6.3.2.RELEASE</version>
 			</dependency>
 
 			<!-- Slf4J API -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>2.0.7</version>
+				<version>2.0.13</version>
 			</dependency>
 
 			<!-- Spring Boot Starter支持 -->
@@ -124,13 +113,25 @@
 			<dependency>
 				<groupId>io.github.swsk33</groupId>
 				<artifactId>code-post-core</artifactId>
-				<version>1.0.0</version>
+				<version>${code-post.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
 		<plugins>
+			<!-- Sonatype中央仓库发布插件 -->
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.3.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+					<tokenAuth>true</tokenAuth>
+				</configuration>
+			</plugin>
+
 			<!-- 源码生成插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -150,7 +151,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.6.3</version>
 				<configuration>
 					<show>private</show>
 					<nohelp>true</nohelp>

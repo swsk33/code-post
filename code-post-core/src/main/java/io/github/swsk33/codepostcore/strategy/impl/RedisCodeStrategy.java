@@ -1,11 +1,11 @@
 package io.github.swsk33.codepostcore.strategy.impl;
 
-import io.github.swsk33.codepostcore.config.LettuceClientConfig;
 import io.github.swsk33.codepostcore.strategy.EmailCodeStrategy;
-import io.lettuce.core.api.async.RedisAsyncCommands;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
+
+import static io.github.swsk33.codepostcore.strategy.context.RedisCommandContext.*;
 
 /**
  * 使用Redis管理验证码的策略
@@ -13,39 +13,22 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class RedisCodeStrategy implements EmailCodeStrategy {
 
-	/**
-	 * Redis命令执行对象
-	 */
-	RedisAsyncCommands<String, String> commands;
-
-	/**
-	 * 构造器：初始化命令执行对象
-	 */
-	public RedisCodeStrategy() {
-		commands = LettuceClientConfig.getCommands();
-	}
-
 	@Override
 	public void saveCode(String key, String code, long period, TimeUnit timeUnit) {
 		// 保存验证码到Redis
-		commands.set(key, code);
+		redisSet(key, code);
 		// 设定过期时间
-		commands.expire(key, timeUnit.toSeconds(period));
+		redisExpire(key, timeUnit.toSeconds(period));
 		log.info("验证码键：" + key + "已保存！");
 	}
 
 	@Override
 	public boolean verifyCode(String key, String inputCode) {
 		// 校验成功则移除验证码
-		String code = null;
-		try {
-			code = commands.get(key).get(2, TimeUnit.MINUTES);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		String code = redisGet(key);
 		// 校验成功则移除验证码
 		if (inputCode.equals(code)) {
-			commands.del(key);
+			redisDelete(key);
 			log.info("验证码键：" + key + " 校验成功！");
 			return true;
 		}

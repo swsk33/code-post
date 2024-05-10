@@ -1,7 +1,6 @@
 package io.github.swsk33.codepostcore.util;
 
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 
 /**
  * URL编码的实用类
@@ -15,7 +14,13 @@ public class URLEncodeUtils {
 	 * @return 编码后字符串
 	 */
 	public static String percentEncode(String origin) {
-		return URLEncoder.encode(origin, StandardCharsets.UTF_8).replace("+", "%20");
+		String result = null;
+		try {
+			result = URLEncoder.encode(origin, "UTF-8").replace("+", "%20");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
