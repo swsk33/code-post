@@ -55,7 +55,7 @@ public class NotifyMailAPI {
 	 */
 	@GetMapping("/single/{mail}")
 	public String sendNotify(@PathVariable("mail") String mail) {
-		emailNotifyService.sendTemplateNotify("专栏更新通知", "notify-template.ftlh", dataModels, mail);
+		emailNotifyService.sendTemplateNotifyAsync("专栏更新通知", "notify-template.ftlh", dataModels, mail);
 		return "已发送通知！";
 	}
 
@@ -68,7 +68,7 @@ public class NotifyMailAPI {
 	 */
 	@PostMapping("/batch")
 	public String sendBatchNotify(@RequestBody String[] emails) {
-		emailNotifyService.sendTemplateNotify("专栏更新通知", "notify-template.txt", dataModels, emails);
+		emailNotifyService.sendTemplateNotifyAsync("专栏更新通知", "notify-template.txt", dataModels, emails);
 		return "已发送通知！";
 	}
 

@@ -47,8 +47,8 @@ public class MultiServiceCodeAPI {
 	 * @return 结果
 	 */
 	@GetMapping("/login-code-send/mail/{mail}/user-id/{userId}")
-	public String loginCodeSend(@PathVariable String mail, @PathVariable int userId) {
-		emailVerifyCodeService.sendCode(EmailService.USER_LOGIN, userId, mail, 1, TimeUnit.MINUTES);
+	public String loginCodeSend(@PathVariable("mail") String mail, @PathVariable("userId") int userId) {
+		emailVerifyCodeService.sendCodeAsync(EmailService.USER_LOGIN, userId, mail, 1, TimeUnit.MINUTES);
 		return "用户登录验证码已发送！";
 	}
 
@@ -61,7 +61,7 @@ public class MultiServiceCodeAPI {
 	 */
 	@GetMapping("/reset-code-send/mail/{mail}/user-id/{userId}")
 	public String passwordResetCodeSend(@PathVariable("mail") String mail, @PathVariable("userId") int userId) {
-		emailVerifyCodeService.sendCode(EmailService.PASSWORD_RESET, userId, mail, 1, TimeUnit.MINUTES);
+		emailVerifyCodeService.sendCodeAsync(EmailService.PASSWORD_RESET, userId, mail, 1, TimeUnit.MINUTES);
 		return "用户密码重置验证码已发送！";
 	}
 

@@ -40,6 +40,38 @@ public interface EmailVerifyCodeService {
 	void sendCode(Enum<?> serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit);
 
 	/**
+	 * 异步发送验证码，使用默认服务名
+	 *
+	 * @param userId        验证码对应的用户id
+	 * @param receiverEmail 验证码接收者邮箱
+	 * @param period        验证码有效时长
+	 * @param timeUnit      验证码有效时长的时间单位
+	 */
+	void sendCodeAsync(Object userId, String receiverEmail, long period, TimeUnit timeUnit);
+
+	/**
+	 * 异步发送验证码，使用自定义服务名
+	 *
+	 * @param serviceNameKey 验证码对应服务名的键（字符串）
+	 * @param userId         验证码对应的用户id
+	 * @param receiverEmail  验证码接收者邮箱
+	 * @param period         验证码有效时长
+	 * @param timeUnit       验证码有效时长的时间单位
+	 */
+	void sendCodeAsync(String serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit);
+
+	/**
+	 * 异步发送验证码，使用自定义服务名
+	 *
+	 * @param serviceNameKey 验证码对应服务名的键（枚举）
+	 * @param userId         验证码对应的用户id
+	 * @param receiverEmail  验证码接收者邮箱
+	 * @param period         验证码有效时长
+	 * @param timeUnit       验证码有效时长的时间单位
+	 */
+	void sendCodeAsync(Enum<?> serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit);
+
+	/**
 	 * 校验验证码，使用默认服务名
 	 *
 	 * @param userId    验证码对应的用户id

@@ -31,9 +31,9 @@ public class SimpleEmailCodeAPI {
 	 */
 	@GetMapping("/send/mail/{email}/user-id/{userId}")
 	public String sendCode(@PathVariable("email") String email, @PathVariable("userId") int userId) {
-		// 调用sendCode方法即可一键完成验证码生成发送操作
+		// 调用sendCodeAsync方法即可一键完成验证码生成发送操作
 		// 参数分别是：邮箱对应的用户id、用户邮箱、验证码有效时长、验证码有效时长单位
-		emailVerifyCodeService.sendCode(userId, email, 1, TimeUnit.MINUTES);
+		emailVerifyCodeService.sendCodeAsync(userId, email, 1, TimeUnit.MINUTES);
 		return "已发送验证码！";
 	}
 

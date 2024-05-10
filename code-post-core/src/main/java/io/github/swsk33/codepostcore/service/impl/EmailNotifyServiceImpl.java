@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 
+import static io.github.swsk33.codepostcore.context.SendThreadPoolContext.submitTask;
 import static io.github.swsk33.codepostcore.util.EmailSendUtils.sendEmail;
 import static io.github.swsk33.codepostcore.util.TemplateUtils.renderTemplate;
 
@@ -35,6 +36,16 @@ public class EmailNotifyServiceImpl implements EmailNotifyService {
 		// 发送邮件
 		sendEmail(title, templateContent, receivers, mailConfig.isEnableHTML());
 		log.info("已向" + receivers.length + "个用户发送通知邮件！");
+	}
+
+	@Override
+	public void sendTemplateNotifyAsync(String title, String template, Map<String, Object> models, String receiver) {
+		submitTask(() -> sendTemplateNotify(title, template, models, receiver));
+	}
+
+	@Override
+	public void sendTemplateNotifyAsync(String title, String template, Map<String, Object> models, String[] receivers) {
+		submitTask(() -> sendTemplateNotify(title, template, models, receivers));
 	}
 
 }

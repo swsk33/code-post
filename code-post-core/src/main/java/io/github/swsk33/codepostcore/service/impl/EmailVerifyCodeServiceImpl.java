@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
+import static io.github.swsk33.codepostcore.context.SendThreadPoolContext.submitTask;
 import static io.github.swsk33.codepostcore.context.ServiceNameContext.DEFAULT_SERVICE_KEY;
 import static io.github.swsk33.codepostcore.util.CodeKeyUtils.generateCodeKey;
 import static io.github.swsk33.codepostcore.util.EmailSendUtils.sendEmail;
@@ -48,6 +49,21 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 	@Override
 	public void sendCode(Enum<?> serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit) {
 		sendCode(serviceNameKey.toString(), userId, receiverEmail, period, timeUnit);
+	}
+
+	@Override
+	public void sendCodeAsync(Object userId, String receiverEmail, long period, TimeUnit timeUnit) {
+		submitTask(() -> sendCode(userId, receiverEmail, period, timeUnit));
+	}
+
+	@Override
+	public void sendCodeAsync(String serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit) {
+		submitTask(() -> sendCode(serviceNameKey, userId, receiverEmail, period, timeUnit));
+	}
+
+	@Override
+	public void sendCodeAsync(Enum<?> serviceNameKey, Object userId, String receiverEmail, long period, TimeUnit timeUnit) {
+		submitTask(() -> sendCode(serviceNameKey, userId, receiverEmail, period, timeUnit));
 	}
 
 	@Override
