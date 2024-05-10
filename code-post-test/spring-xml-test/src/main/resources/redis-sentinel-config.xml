@@ -9,7 +9,5 @@
 		<property name="nodes" value="127.0.0.1:7000,127.0.0.1:7001"/>
 		<!-- Redis主节点密码 -->
 		<property name="password" value="123456"/>
-		<!-- Redis哨兵密码 -->
-		<property name="sentinelPassword" value="789101112"/>
 	</bean>
 </beans>

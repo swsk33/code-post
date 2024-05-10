@@ -9,9 +9,10 @@
 		<img alt="GitHub" src="https://img.shields.io/github/license/swsk33/code-post">
 	</a>
 	<a target="_blank" href="https://www.azul.com/downloads/#downloads-table-zulu">
-		<img alt="Static Badge" src="https://img.shields.io/badge/17%2B-blue?label=JDK">
+		<img alt="Static Badge" src="https://img.shields.io/badge/1.8%2B-blue?label=JDK">
 	</a>
 </p>
+
 
 ## 1，介绍
 CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的生成、发送和校验等功能做了封装，使得开发者能够更加简单地完成邮件验证码功能。
@@ -43,8 +44,8 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 
 无论是普通Java项目，还是Spring，以及Spring Boot都可以使用该框架，需要满足下列基本要求：
 
-- JDK 17及其以上版本
-- Spring Boot环境集成时，需要Spring Boot 3.0.0及其以上版本
+- JDK 1.8及其以上版本
+- Spring Boot环境集成时，需要Spring Boot 2.x及其以上版本，建议使用2.7.x及其以上版本
 
 ### (2) 开启邮箱SMTP服务
 
@@ -52,11 +53,11 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 
 可以使用QQ或者163等邮箱，登录对应邮箱网站，在设置中开启IMAP/SMTP服务即可，这里以163邮箱为例，登录后在设置点击POP3/SMTP/IMAP选项：
 
-![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/3b0b8af4c4844c5285d687c69ceeb637~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
+![](https://swsk33-note.oss-cn-shanghai.aliyuncs.com/3b0b8af4c4844c5285d687c69ceeb637~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
 开启任意一个即可，然后按照指引操作，最后会得到一个**授权码**，建议复制到一个文本文档记下来，这个页面也可以看到SMTP地址，复制到配置里面即可：
 
-![](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/137c06c1a51d41afa26e5837436a6a0e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
+![](https://swsk33-note.oss-cn-shanghai.aliyuncs.com/137c06c1a51d41afa26e5837436a6a0e~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp)
 
 ### (3) 在Spring Boot环境集成
 
@@ -66,7 +67,7 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 <dependency>
 	<groupId>io.github.swsk33</groupId>
 	<artifactId>code-post-spring-boot-starter</artifactId>
-	<version>1.0.0</version>
+	<version>1.2.0</version>
 </dependency>
 ```
 
@@ -142,10 +143,10 @@ public class SimpleEmailCodeAPI {
 	 * @return 消息
 	 */
 	@GetMapping("/send/mail/{email}/user-id/{userId}")
-	public String sendCode(@PathVariable String email, @PathVariable int userId) {
-		// 调用sendCode方法即可一键完成验证码生成发送操作
+	public String sendCode(@PathVariable("email") String email, @PathVariable("userId") int userId) {
+		// 调用sendCodeAsync方法即可一键完成验证码生成发送操作
 		// 参数分别是：邮箱对应的用户id、用户邮箱、验证码有效时长、验证码有效时长单位
-		emailVerifyCodeService.sendCode(userId, email, 1, TimeUnit.MINUTES);
+		emailVerifyCodeService.sendCodeAsync(userId, email, 1, TimeUnit.MINUTES);
 		return "已发送验证码！";
 	}
 
@@ -157,7 +158,7 @@ public class SimpleEmailCodeAPI {
 	 * @return 消息
 	 */
 	@GetMapping("/verify/user-id/{userId}/code/{inputCode}")
-	public String verifyCode(@PathVariable int userId, @PathVariable String inputCode) {
+	public String verifyCode(@PathVariable("userId") int userId, @PathVariable("inputCode") String inputCode) {
 		// 调用verifyCode方法即可一键完成验证码校验操作
 		// 参数分别是：邮箱对应的用户id、用户传入的验证码（用于校验）
 		// 校验成功返回true，并且验证码也会立即失效
@@ -182,11 +183,25 @@ public class SimpleEmailCodeAPI {
 
 通过仅仅几行代码，我们就完成了验证码的发送、校验操作了！在这背后，框架自动地完成了验证码生成、管理、邮件渲染发送等操作。
 
-## 3，文档
+## 3，常见问题排查
+
+### (1) 发送富文本邮件时抛出异常：`java.lang.NoClassDefFoundError: jakarta/activation/DataHandler`
+
+该问题通常出现在JDK 1.8 + Spring Boot 2.x的环境下，这是由于Spring Boot 2.x使用的Java EE规范和Angus Mail的Jakarta EE规范不一致导致，在项目中加入最新的`jakarta.activation-api`依赖即可，而不是继承Spring Boot中的版本：
+
+```xml
+<!-- 使用Spring Boot 2.x还需手动添加最新版jakarta.activation-api -->
+<dependency>
+	<groupId>jakarta.activation</groupId>
+	<artifactId>jakarta.activation-api</artifactId>
+	<version>2.1.3</version>
+</dependency>
+```
+
+## 4，文档
 
 关于该框架详细功能以及API，请参考：
 
-- 详细文档：[传送门](./code-post-doc/主要文档.md)
-- 配置参考：[传送门](./code-post-doc/配置参考.md)
+- 详细文档：[传送门](./docs/主要文档.md)
+- 配置参考：[传送门](./docs/配置参考.md)
 - 一些示例程序：[传送门](https://github.com/swsk33/code-post/tree/master/code-post-test)
-- API文档：[传送门](https://apidoc.gitee.com/swsk33/code-post)
