@@ -1,18 +1,19 @@
 # Maven
-/**/target/
+target/
 
 # VSCode
-/**/.vscode/
+.vscode/
 
 # Eclipse
-/**/.settings/
-/**/.classpath
-/**/.project
+.settings/
+.classpath
+.project
+.factorypath
 
 # IDEA
-/**/.idea/
-/**/*.iml
+.idea/
+*.iml
 
 # draw.io
-/**/.$*.bkp
-/**/.$*.dtmp
+.$*.bkp
+.$*.dtmp
