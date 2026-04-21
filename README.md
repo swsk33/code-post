@@ -67,7 +67,7 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 <dependency>
 	<groupId>io.github.swsk33</groupId>
 	<artifactId>code-post-spring-boot-starter</artifactId>
-	<version>1.2.0</version>
+	<version>2.0.0</version>
 </dependency>
 ```
 
@@ -105,6 +105,20 @@ io:
 ```
 
 上述配置中邮箱、授权码替换成第(2)步得到的，这里使用的是`YAML`格式的配置，使用`properties`同理。
+
+如果不使用Spring Boot Starter，也可以直接使用不可变配置对象构建服务实例：
+
+```java
+MailConfig mailConfig = MailConfig.builder()
+	.smtpHost("smtp.163.com")
+	.email("your-email@example.com")
+	.password("your-secret")
+	.codeStorage(CodeStorageMethod.LOCAL_THREAD_POOL)
+	.build();
+
+EmailVerifyCodeService verifyCodeService = new EmailVerifyCodeServiceImpl(mailConfig);
+EmailNotifyService notifyService = new EmailNotifyServiceImpl(mailConfig);
+```
 
 ### (4) 编写API测试
 

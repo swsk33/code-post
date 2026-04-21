@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Configuration;
 public class RedisConfigAutoConfiguration {
 
 	/**
-	 * 读取Spring Boot的Redis配置，自动配置注入Redis配置对象单例
+	 * 读取Spring Boot 的Redis配置，自动构造Redis配置对象
 	 * 连接模式通过对应配置非空来进行判断，优先级：Cluster > Sentinel > Standalone
 	 */
 	@Bean
@@ -33,25 +33,25 @@ public class RedisConfigAutoConfiguration {
 		log.info("使用基于Redis的邮件验证码管理方案");
 		// 如果是Cluster模式
 		if (redisProperties.getCluster() != null && redisProperties.getCluster().getNodes() != null && !redisProperties.getCluster().getNodes().isEmpty()) {
-			RedisClusterConfig clusterConfig = RedisClusterConfig.getInstance();
-			clusterConfig.setNodes(String.join(",", redisProperties.getCluster().getNodes()));
-			clusterConfig.setPassword(redisProperties.getPassword());
-			return clusterConfig;
+			return RedisClusterConfig.builder()
+				.nodes(String.join(",", redisProperties.getCluster().getNodes()))
+				.password(redisProperties.getPassword())
+				.build();
 		}
 		// 如果是Sentinel模式
 		if (redisProperties.getSentinel() != null && redisProperties.getSentinel().getNodes() != null && !redisProperties.getSentinel().getNodes().isEmpty()) {
-			RedisSentinelConfig sentinelConfig = RedisSentinelConfig.getInstance();
-			sentinelConfig.setMasterName(redisProperties.getSentinel().getMaster());
-			sentinelConfig.setPassword(redisProperties.getPassword());
-			sentinelConfig.setNodes(String.join(",", redisProperties.getSentinel().getNodes()));
-			return sentinelConfig;
+			return RedisSentinelConfig.builder()
+				.masterName(redisProperties.getSentinel().getMaster())
+				.password(redisProperties.getPassword())
+				.nodes(String.join(",", redisProperties.getSentinel().getNodes()))
+				.build();
 		}
 		// 否则就是单机模式
-		RedisStandaloneConfig standaloneConfig = RedisStandaloneConfig.getInstance();
-		standaloneConfig.setHost(redisProperties.getHost());
-		standaloneConfig.setPort(redisProperties.getPort());
-		standaloneConfig.setPassword(redisProperties.getPassword());
-		return standaloneConfig;
+		return RedisStandaloneConfig.builder()
+			.host(redisProperties.getHost())
+			.port(redisProperties.getPort())
+			.password(redisProperties.getPassword())
+			.build();
 	}
 
 }

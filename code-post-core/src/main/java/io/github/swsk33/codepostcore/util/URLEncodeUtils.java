@@ -3,7 +3,7 @@ package io.github.swsk33.codepostcore.util;
 import java.net.URLEncoder;
 
 /**
- * URL编码的实用类
+ * URL 编码的实用类
  */
 public class URLEncodeUtils {
 
@@ -18,7 +18,7 @@ public class URLEncodeUtils {
 		try {
 			result = URLEncoder.encode(origin, "UTF-8").replace("+", "%20");
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
 		return result;
 	}

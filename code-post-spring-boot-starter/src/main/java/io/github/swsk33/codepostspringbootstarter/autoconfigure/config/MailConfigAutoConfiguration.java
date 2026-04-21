@@ -24,9 +24,7 @@ public class MailConfigAutoConfiguration {
 	 */
 	@Bean
 	public MailConfig mailConfig(CoreProperties coreProperties) {
-		// 获取配置单例并设定
-		MailConfig mailConfig = MailConfig.getInstance();
-		coreProperties.setMailConfig(mailConfig);
+		MailConfig mailConfig = coreProperties.toMailConfig();
 		// 本地线程池无需额外配置对象
 		if (mailConfig.getCodeStorage().equals(CodeStorageMethod.LOCAL_THREAD_POOL)) {
 			log.info("使用基于本地线程池的验证码管理方案");

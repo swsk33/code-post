@@ -3,22 +3,22 @@
 	<parent>
 		<groupId>io.github.swsk33</groupId>
 		<artifactId>code-post-parent</artifactId>
-		<version>1.2.0</version>
+		<version>2.0.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>code-post-core</artifactId>
 	<name>CodePost - Core</name>
-	<description>CodePost框架核心代码</description>
+	<description>CodePost 框架核心代码</description>
 	<url>https://github.com/swsk33/code-post</url>
 
 	<dependencies>
-		<!-- Hutool实用工具 -->
+		<!-- Hutool 核心工具 -->
 		<dependency>
 			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-all</artifactId>
+			<artifactId>hutool-core</artifactId>
 		</dependency>
 
-		<!-- FreeMarker模板引擎 -->
+		<!-- FreeMarker 模板引擎 -->
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -30,18 +30,31 @@
 			<artifactId>jakarta.mail</artifactId>
 		</dependency>
 
-		<!-- Slf4J API -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>2.0.13</version>
-		</dependency>
-
 		<!-- Lettuce Redis客户端 -->
 		<dependency>
 			<groupId>io.lettuce</groupId>
 			<artifactId>lettuce-core</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- JUnit 单元测试 -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- 测试相关插件 -->
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>

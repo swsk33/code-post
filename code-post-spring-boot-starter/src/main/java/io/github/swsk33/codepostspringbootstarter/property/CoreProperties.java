@@ -71,23 +71,20 @@ public class CoreProperties {
 	 */
 	private String codeTemplateName;
 
-	/**
-	 * 将读取到的配置设定到邮件配置对象中去
-	 *
-	 * @param mailConfig 传入邮件配置对象
-	 */
-	public void setMailConfig(MailConfig mailConfig) {
-		mailConfig.setSMTPHost(smtpHost);
-		mailConfig.setEmail(email);
-		mailConfig.setPassword(password);
-		mailConfig.setEnableTLS(enableTls);
-		mailConfig.setCodeStorage(codeStorage);
-		mailConfig.setCodeFormat(codeFormat);
-		mailConfig.setCodeLength(codeLength);
-		mailConfig.setSiteName(siteName);
-		mailConfig.setEnableHTML(enableHtml);
-		mailConfig.setTemplatePath(templatePath);
-		mailConfig.setCodeTemplateName(codeTemplateName);
+	public MailConfig toMailConfig() {
+		return MailConfig.builder()
+			.smtpHost(smtpHost)
+			.email(email)
+			.password(password)
+			.enableTls(enableTls)
+			.codeStorage(codeStorage)
+			.codeFormat(codeFormat)
+			.codeLength(codeLength)
+			.siteName(siteName)
+			.enableHtml(enableHtml)
+			.templatePath(templatePath)
+			.codeTemplateName(codeTemplateName)
+			.build();
 	}
 
 }

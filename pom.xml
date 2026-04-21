@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.swsk33</groupId>
 	<artifactId>code-post-parent</artifactId>
-	<version>1.2.0</version>
+	<version>2.0.0</version>
 	<packaging>pom</packaging>
 	<name>CodePost - Parent</name>
 	<description>CodePost是一个简单的邮件验证码生成和发送框架，用于简化后端服务中生成、发送和验证邮件验证码的逻辑</description>
@@ -21,13 +21,13 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.boot.starter.version>2.7.11</spring.boot.starter.version>
-		<code-post.version>1.2.0</code-post.version>
+		<maven.test-plugin.version>3.5.5</maven.test-plugin.version>
 	</properties>
 
 	<licenses>
 		<license>
-			<name>GNU General Public License v2.0</name>
-			<url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+			<name>Apache License Version 2.0</name>
+			<url>https://www.apache.org/licenses/</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -48,11 +48,10 @@
 
 	<!-- 公用依赖 -->
 	<dependencies>
-		<!-- Lombok注解支持 -->
+		<!-- Lombok 注解支持 -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.32</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -60,54 +59,102 @@
 	<!-- 依赖版本管理 -->
 	<dependencyManagement>
 		<dependencies>
-			<!-- Hutool -->
+			<!-- Lombok 注解支持 -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>1.18.44</version>
+			</dependency>
+
+			<!-- Hutool 实用工具 -->
 			<dependency>
 				<groupId>cn.hutool</groupId>
-				<artifactId>hutool-all</artifactId>
-				<version>5.8.27</version>
+				<artifactId>hutool-bom</artifactId>
+				<version>5.8.44</version>
+				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 
 			<!-- Jakarta Mail邮件支持，包含Jakarta Mail API及其实现类Angus Mail（原JavaEE Mail） -->
 			<dependency>
 				<groupId>org.eclipse.angus</groupId>
 				<artifactId>jakarta.mail</artifactId>
-				<version>2.0.3</version>
+				<version>2.0.5</version>
 			</dependency>
 
-			<!-- FreeMarker模板渲染器 -->
+			<!-- FreeMarker 模板渲染器 -->
 			<dependency>
 				<groupId>org.freemarker</groupId>
 				<artifactId>freemarker</artifactId>
-				<version>2.3.32</version>
+				<version>2.3.34</version>
 			</dependency>
 
 			<!-- Lettuce Redis客户端 -->
 			<dependency>
 				<groupId>io.lettuce</groupId>
 				<artifactId>lettuce-core</artifactId>
-				<version>6.3.2.RELEASE</version>
+				<version>7.5.1.RELEASE</version>
 			</dependency>
 
-			<!-- CodePost核心 -->
+			<!-- JUnit 单元测试 -->
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>6.0.3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- CodePost 核心 -->
 			<dependency>
 				<groupId>io.github.swsk33</groupId>
 				<artifactId>code-post-core</artifactId>
-				<version>${code-post.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
 	<build>
+		<!-- 插件版本管理 -->
+		<pluginManagement>
+			<plugins>
+				<!-- 测试相关插件 -->
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven.test-plugin.version}</version>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven.test-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
-			<!-- Sonatype中央仓库发布插件 -->
+			<!-- Maven 源码编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.15.0</version>
+				<configuration>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</path>
+					</annotationProcessorPaths>
+				</configuration>
+			</plugin>
+
+			<!-- Sonatype 中央仓库发布插件 -->
 			<plugin>
 				<groupId>org.sonatype.central</groupId>
 				<artifactId>central-publishing-maven-plugin</artifactId>
-				<version>0.3.0</version>
+				<version>0.10.0</version>
 				<extensions>true</extensions>
 				<configuration>
 					<publishingServerId>central</publishingServerId>
-					<tokenAuth>true</tokenAuth>
 				</configuration>
 			</plugin>
 
@@ -115,7 +162,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>3.4.0</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -126,14 +173,15 @@
 				</executions>
 			</plugin>
 
-			<!-- Javadoc文档生成插件 -->
+			<!-- Javadoc 文档生成插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.6.3</version>
+				<version>3.12.0</version>
 				<configuration>
 					<show>private</show>
 					<nohelp>true</nohelp>
+					<doclint>all,-missing</doclint>
 				</configuration>
 				<executions>
 					<execution>
@@ -145,11 +193,11 @@
 				</executions>
 			</plugin>
 
-			<!-- GPG签名插件 -->
+			<!-- GPG 签名插件 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-gpg-plugin</artifactId>
-				<version>3.1.0</version>
+				<version>3.2.8</version>
 				<executions>
 					<execution>
 						<id>sign-artifacts</id>

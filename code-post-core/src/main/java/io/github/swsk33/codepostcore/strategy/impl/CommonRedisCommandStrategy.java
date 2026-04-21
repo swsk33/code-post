@@ -1,7 +1,7 @@
 package io.github.swsk33.codepostcore.strategy.impl;
 
-import io.github.swsk33.codepostcore.config.LettuceClientConfig;
 import io.github.swsk33.codepostcore.strategy.RedisCommandStrategy;
+import io.lettuce.core.api.sync.BaseRedisCommands;
 import io.lettuce.core.api.sync.RedisCommands;
 
 /**
@@ -9,16 +9,10 @@ import io.lettuce.core.api.sync.RedisCommands;
  */
 public class CommonRedisCommandStrategy implements RedisCommandStrategy {
 
-	/**
-	 * Redis命令对象
-	 */
 	private final RedisCommands<String, String> commands;
 
-	/**
-	 * 构造函数，初始化命令对象
-	 */
-	public CommonRedisCommandStrategy() {
-		commands = (RedisCommands<String, String>) LettuceClientConfig.getCommands();
+	public CommonRedisCommandStrategy(BaseRedisCommands<String, String> commands) {
+		this.commands = (RedisCommands<String, String>) commands;
 	}
 
 	@Override
