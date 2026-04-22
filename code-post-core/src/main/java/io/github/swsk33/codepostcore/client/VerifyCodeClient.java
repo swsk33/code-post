@@ -1,11 +1,11 @@
-package io.github.swsk33.codepostcore.strategy;
+package io.github.swsk33.codepostcore.client;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * 关于一些邮件验证码的操作策略
+ * 邮件验证码的上层操作客户端封装
  */
-public interface EmailCodeStrategy {
+public interface VerifyCodeClient {
 
 	/**
 	 * 暂存验证码

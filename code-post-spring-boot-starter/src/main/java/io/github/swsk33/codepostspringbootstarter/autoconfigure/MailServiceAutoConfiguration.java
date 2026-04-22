@@ -32,7 +32,7 @@ public class MailServiceAutoConfiguration {
 	}
 
 	/**
-	 * 自动配置基于Redis的邮件验证码服务类
+	 * 自动配置基于 Redis 的邮件验证码服务类
 	 */
 	@Bean
 	@ConditionalOnProperty(prefix = "io.github.swsk33.code-post.core", value = "code-storage", havingValue = CodeStorageMethod.REDIS)

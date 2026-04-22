@@ -30,28 +30,28 @@ public class RedisConfigAutoConfiguration {
 	 */
 	@Bean
 	public RedisClientConfig readConfig(RedisProperties redisProperties) {
-		log.info("使用基于Redis的邮件验证码管理方案");
-		// 如果是Cluster模式
+		log.info("使用基于 Redis 的邮件验证码管理方案");
+		// 如果是 Cluster 模式
 		if (redisProperties.getCluster() != null && redisProperties.getCluster().getNodes() != null && !redisProperties.getCluster().getNodes().isEmpty()) {
 			return RedisClusterConfig.builder()
-				.nodes(String.join(",", redisProperties.getCluster().getNodes()))
-				.password(redisProperties.getPassword())
-				.build();
+					.nodes(String.join(",", redisProperties.getCluster().getNodes()))
+					.password(redisProperties.getPassword())
+					.build();
 		}
-		// 如果是Sentinel模式
+		// 如果是 Sentinel 模式
 		if (redisProperties.getSentinel() != null && redisProperties.getSentinel().getNodes() != null && !redisProperties.getSentinel().getNodes().isEmpty()) {
 			return RedisSentinelConfig.builder()
-				.masterName(redisProperties.getSentinel().getMaster())
-				.password(redisProperties.getPassword())
-				.nodes(String.join(",", redisProperties.getSentinel().getNodes()))
-				.build();
+					.masterName(redisProperties.getSentinel().getMaster())
+					.password(redisProperties.getPassword())
+					.nodes(String.join(",", redisProperties.getSentinel().getNodes()))
+					.build();
 		}
 		// 否则就是单机模式
 		return RedisStandaloneConfig.builder()
-			.host(redisProperties.getHost())
-			.port(redisProperties.getPort())
-			.password(redisProperties.getPassword())
-			.build();
+				.host(redisProperties.getHost())
+				.port(redisProperties.getPort())
+				.password(redisProperties.getPassword())
+				.build();
 	}
 
 }

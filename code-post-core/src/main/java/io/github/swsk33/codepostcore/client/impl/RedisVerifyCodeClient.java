@@ -1,23 +1,31 @@
-package io.github.swsk33.codepostcore.strategy.impl;
+package io.github.swsk33.codepostcore.client.impl;
 
 import io.github.swsk33.codepostcore.client.LettuceClient;
 import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
-import io.github.swsk33.codepostcore.strategy.EmailCodeStrategy;
+import io.github.swsk33.codepostcore.client.VerifyCodeClient;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 使用 Redis 管理验证码的策略
+ * 使用 Redis 管理验证码的客户端实现
  */
 @Slf4j
-public class RedisCodeStrategy implements EmailCodeStrategy {
+public class RedisVerifyCodeClient implements VerifyCodeClient {
 
+	/**
+	 * Redis 客户端
+	 */
 	private final LettuceClient lettuceClient;
 
-	public RedisCodeStrategy(RedisClientConfig redisClientConfig) {
-		this.lettuceClient = new LettuceClient(Objects.requireNonNull(redisClientConfig, "redisClientConfig must not be null"));
+	/**
+	 * 使用 Redis 配置初始化 Redis 验证码客户端
+	 *
+	 * @param redisClientConfig Redis 配置
+	 */
+	public RedisVerifyCodeClient(RedisClientConfig redisClientConfig) {
+		this.lettuceClient = new LettuceClient(Objects.requireNonNull(redisClientConfig, "redisClientConfig 不能为空"));
 	}
 
 	@Override

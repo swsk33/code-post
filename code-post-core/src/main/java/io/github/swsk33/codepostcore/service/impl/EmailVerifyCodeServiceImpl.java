@@ -7,10 +7,10 @@ import io.github.swsk33.codepostcore.model.config.MailConfig;
 import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
 import io.github.swsk33.codepostcore.param.CodeStorageMethod;
 import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
-import io.github.swsk33.codepostcore.strategy.EmailCodeStrategy;
+import io.github.swsk33.codepostcore.client.VerifyCodeClient;
 import io.github.swsk33.codepostcore.strategy.context.CodeGenerateContext;
-import io.github.swsk33.codepostcore.strategy.impl.RedisCodeStrategy;
-import io.github.swsk33.codepostcore.strategy.impl.ThreadPoolCodeStrategy;
+import io.github.swsk33.codepostcore.client.impl.RedisVerifyCodeClient;
+import io.github.swsk33.codepostcore.client.impl.ThreadPoolVerifyCodeClient;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
@@ -31,9 +31,9 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 	private final MailConfig mailConfig;
 
 	/**
-	 * 邮件验证码生成策略
+	 * 邮件验证码生成操作客户端
 	 */
-	private final EmailCodeStrategy emailCodeStrategy;
+	private final VerifyCodeClient verifyCodeClient;
 
 	/**
 	 * 邮件客户端对象
@@ -58,7 +58,7 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 			throw new IllegalArgumentException("当未传入Redis配置时，验证码过期方案必须为 local_thread_pool");
 		}
 		this.mailConfig = mailConfig;
-		this.emailCodeStrategy = new ThreadPoolCodeStrategy();
+		this.verifyCodeClient = new ThreadPoolVerifyCodeClient();
 		this.mailClient = new MailClient(mailConfig);
 		this.freeMarkerClient = new FreeMarkerClient(mailConfig);
 	}
@@ -80,7 +80,7 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 			throw new IllegalArgumentException("当传入 Redis 配置时，验证码过期方案也必须为 redis");
 		}
 		this.mailConfig = mailConfig;
-		this.emailCodeStrategy = new RedisCodeStrategy(redisClientConfig);
+		this.verifyCodeClient = new RedisVerifyCodeClient(redisClientConfig);
 		this.mailClient = new MailClient(mailConfig);
 		this.freeMarkerClient = new FreeMarkerClient(mailConfig);
 	}
@@ -95,7 +95,7 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 		String code = CodeGenerateContext.generateCode(mailConfig.getCodeFormat(), mailConfig.getCodeLength());
 		String mailContent = freeMarkerClient.renderVerifyMailTemplate(serviceNameKey, code, period, timeUnit);
 		mailClient.sendEmail(mailConfig.getEmail(), mailConfig.getSiteName() + " - " + ServiceNameContext.getServiceName(serviceNameKey), mailContent, new String[]{receiverEmail}, mailConfig.isEnableHtml());
-		emailCodeStrategy.saveCode(generateCodeKey(serviceNameKey, userId), code, period, timeUnit);
+		verifyCodeClient.saveCode(generateCodeKey(serviceNameKey, userId), code, period, timeUnit);
 		log.info("已向{}发送验证码邮件！", receiverEmail);
 	}
 
@@ -126,7 +126,7 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 
 	@Override
 	public boolean verifyCode(String serviceNameKey, Object userId, String inputCode) {
-		return emailCodeStrategy.verifyCode(generateCodeKey(serviceNameKey, userId), inputCode);
+		return verifyCodeClient.verifyCode(generateCodeKey(serviceNameKey, userId), inputCode);
 	}
 
 	@Override

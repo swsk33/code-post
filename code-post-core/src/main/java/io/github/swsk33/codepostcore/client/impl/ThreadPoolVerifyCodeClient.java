@@ -1,16 +1,16 @@
-package io.github.swsk33.codepostcore.strategy.impl;
+package io.github.swsk33.codepostcore.client.impl;
 
-import io.github.swsk33.codepostcore.strategy.EmailCodeStrategy;
+import io.github.swsk33.codepostcore.client.VerifyCodeClient;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Map;
 import java.util.concurrent.*;
 
 /**
- * 基于本地线程池的验证码管理策略
+ * 基于本地线程池的验证码管理客户端实现
  */
 @Slf4j
-public class ThreadPoolCodeStrategy implements EmailCodeStrategy {
+public class ThreadPoolVerifyCodeClient implements VerifyCodeClient {
 
 	/**
 	 * 存放所有验证码键值对的哈希表
@@ -30,7 +30,7 @@ public class ThreadPoolCodeStrategy implements EmailCodeStrategy {
 	/**
 	 * 构造器，用于初始化所有的对象
 	 */
-	public ThreadPoolCodeStrategy() {
+	public ThreadPoolVerifyCodeClient() {
 		codeMap = new ConcurrentHashMap<>();
 		scheduleMap = new ConcurrentHashMap<>();
 		executor = Executors.newScheduledThreadPool(24);
