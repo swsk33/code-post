@@ -46,7 +46,7 @@ public class ThreadPoolCodeStrategy implements EmailCodeStrategy {
 			// 时间到了后，移除验证码
 			codeMap.remove(key);
 			scheduleMap.remove(key);
-			log.warn("验证码键：" + key + " 过期！");
+			log.warn("验证码键：{} 过期！", key);
 		}, period, timeUnit);
 		// 把任务放入任务列表
 		scheduleMap.put(key, future);
@@ -58,7 +58,7 @@ public class ThreadPoolCodeStrategy implements EmailCodeStrategy {
 			// 校验成功，移除验证码，取消定时任务
 			codeMap.remove(key);
 			scheduleMap.remove(key).cancel(true);
-			log.info("验证码键：" + key + " 校验成功！");
+			log.info("验证码键：{} 校验成功！", key);
 			return true;
 		}
 		// 校验失败则不做任何操作

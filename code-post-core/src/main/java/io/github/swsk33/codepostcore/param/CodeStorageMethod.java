@@ -11,7 +11,7 @@ public class CodeStorageMethod {
 	public static final String LOCAL_THREAD_POOL = "thread_pool";
 
 	/**
-	 * 使用Redis存放验证码以及管理验证码过期
+	 * 使用 Redis 存放验证码以及管理验证码过期
 	 */
 	public static final String REDIS = "redis";
 

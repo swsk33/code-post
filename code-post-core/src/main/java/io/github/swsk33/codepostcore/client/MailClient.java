@@ -59,7 +59,7 @@ public class MailClient {
 	 *
 	 * @return 连接对象
 	 */
-	private synchronized Transport getTransport() {
+	protected synchronized Transport getTransport() {
 		if (transport == null) {
 			try {
 				transport = session.getTransport();

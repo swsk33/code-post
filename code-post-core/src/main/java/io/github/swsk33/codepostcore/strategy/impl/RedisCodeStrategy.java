@@ -2,57 +2,37 @@ package io.github.swsk33.codepostcore.strategy.impl;
 
 import io.github.swsk33.codepostcore.client.LettuceClient;
 import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
-import io.github.swsk33.codepostcore.model.config.RedisClusterConfig;
 import io.github.swsk33.codepostcore.strategy.EmailCodeStrategy;
-import io.github.swsk33.codepostcore.strategy.RedisCommandStrategy;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 使用Redis管理验证码的策略
+ * 使用 Redis 管理验证码的策略
  */
 @Slf4j
 public class RedisCodeStrategy implements EmailCodeStrategy {
 
-	private final RedisClientConfig redisClientConfig;
-
-	private volatile RedisCommandStrategy redisCommandStrategy;
+	private final LettuceClient lettuceClient;
 
 	public RedisCodeStrategy(RedisClientConfig redisClientConfig) {
-		this.redisClientConfig = Objects.requireNonNull(redisClientConfig, "redisClientConfig must not be null");
-	}
-
-	private RedisCommandStrategy getRedisCommandStrategy() {
-		if (redisCommandStrategy == null) {
-			synchronized (this) {
-				if (redisCommandStrategy == null) {
-					LettuceClient lettuceClient = new LettuceClient(redisClientConfig);
-					if (redisClientConfig instanceof RedisClusterConfig) {
-						redisCommandStrategy = new ClusterRedisCommandStrategy(lettuceClient.getCommands());
-					} else {
-						redisCommandStrategy = new CommonRedisCommandStrategy(lettuceClient.getCommands());
-					}
-				}
-			}
-		}
-		return redisCommandStrategy;
+		this.lettuceClient = new LettuceClient(Objects.requireNonNull(redisClientConfig, "redisClientConfig must not be null"));
 	}
 
 	@Override
 	public void saveCode(String key, String code, long period, TimeUnit timeUnit) {
-		getRedisCommandStrategy().set(key, code);
-		getRedisCommandStrategy().expire(key, timeUnit.toSeconds(period));
-		log.info("验证码键：" + key + "已保存！");
+		lettuceClient.getCommands().set(key, code);
+		lettuceClient.getCommands().expire(key, timeUnit.toSeconds(period));
+		log.info("验证码键：{}已保存！", key);
 	}
 
 	@Override
 	public boolean verifyCode(String key, String inputCode) {
-		String code = getRedisCommandStrategy().get(key);
+		String code = lettuceClient.getCommands().get(key);
 		if (inputCode.equals(code)) {
-			getRedisCommandStrategy().del(key);
-			log.info("验证码键：" + key + " 校验成功！");
+			lettuceClient.getCommands().del(key);
+			log.info("验证码键：{} 校验成功！", key);
 			return true;
 		}
 		return false;
