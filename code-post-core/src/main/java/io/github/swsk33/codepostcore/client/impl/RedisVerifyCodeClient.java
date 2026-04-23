@@ -1,11 +1,9 @@
 package io.github.swsk33.codepostcore.client.impl;
 
 import io.github.swsk33.codepostcore.client.LettuceClient;
-import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
 import io.github.swsk33.codepostcore.client.VerifyCodeClient;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -20,12 +18,12 @@ public class RedisVerifyCodeClient implements VerifyCodeClient {
 	private final LettuceClient lettuceClient;
 
 	/**
-	 * 使用 Redis 配置初始化 Redis 验证码客户端
+	 * 构造函数，使用 Redis 客户端对象初始化
 	 *
-	 * @param redisClientConfig Redis 配置
+	 * @param lettuceClient Lettuce Redis 客户端对象
 	 */
-	public RedisVerifyCodeClient(RedisClientConfig redisClientConfig) {
-		this.lettuceClient = new LettuceClient(Objects.requireNonNull(redisClientConfig, "redisClientConfig 不能为空"));
+	public RedisVerifyCodeClient(LettuceClient lettuceClient) {
+		this.lettuceClient = lettuceClient;
 	}
 
 	@Override

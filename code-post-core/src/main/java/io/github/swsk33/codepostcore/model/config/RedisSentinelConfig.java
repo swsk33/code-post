@@ -1,5 +1,6 @@
 package io.github.swsk33.codepostcore.model.config;
 
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
@@ -22,5 +23,11 @@ public class RedisSentinelConfig extends RedisClientConfig {
 	 * 例如：127.0.0.1:7000,127.0.0.1:7001,127.0.0.1:7002
 	 */
 	private final String nodes;
+
+	/**
+	 * Redis数据库编号，默认：0
+	 */
+	@Builder.Default
+	private final int database = 0;
 
 }

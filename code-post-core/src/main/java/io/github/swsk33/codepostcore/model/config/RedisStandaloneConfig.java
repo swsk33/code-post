@@ -14,15 +14,21 @@ import lombok.experimental.SuperBuilder;
 public class RedisStandaloneConfig extends RedisClientConfig {
 
 	/**
-	 * Redis地址，默认127.0.0.1
+	 * Redis地址，默认：127.0.0.1
 	 */
 	@Builder.Default
 	private final String host = "127.0.0.1";
 
 	/**
-	 * Redis端口，默认6379
+	 * Redis端口，默认：6379
 	 */
 	@Builder.Default
 	private final int port = 6379;
+
+	/**
+	 * Redis数据库编号，默认：0
+	 */
+	@Builder.Default
+	private final int database = 0;
 
 }

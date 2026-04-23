@@ -1,16 +1,16 @@
 package io.github.swsk33.codepostcore.service.impl;
 
 import io.github.swsk33.codepostcore.client.FreeMarkerClient;
+import io.github.swsk33.codepostcore.client.LettuceClient;
 import io.github.swsk33.codepostcore.client.MailClient;
+import io.github.swsk33.codepostcore.client.VerifyCodeClient;
+import io.github.swsk33.codepostcore.client.impl.RedisVerifyCodeClient;
+import io.github.swsk33.codepostcore.client.impl.ThreadPoolVerifyCodeClient;
 import io.github.swsk33.codepostcore.context.ServiceNameContext;
 import io.github.swsk33.codepostcore.model.config.MailConfig;
 import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
-import io.github.swsk33.codepostcore.param.CodeStorageMethod;
 import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
-import io.github.swsk33.codepostcore.client.VerifyCodeClient;
 import io.github.swsk33.codepostcore.strategy.context.CodeGenerateContext;
-import io.github.swsk33.codepostcore.client.impl.RedisVerifyCodeClient;
-import io.github.swsk33.codepostcore.client.impl.ThreadPoolVerifyCodeClient;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
@@ -31,11 +31,6 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 	private final MailConfig mailConfig;
 
 	/**
-	 * 邮件验证码生成操作客户端
-	 */
-	private final VerifyCodeClient verifyCodeClient;
-
-	/**
 	 * 邮件客户端对象
 	 */
 	private final MailClient mailClient;
@@ -46,43 +41,46 @@ public class EmailVerifyCodeServiceImpl implements EmailVerifyCodeService {
 	private final FreeMarkerClient freeMarkerClient;
 
 	/**
-	 * 使用邮件配置对象初始化服务，适用于本地线程池验证码存储方案
+	 * 邮件验证码生成操作客户端
+	 */
+	private final VerifyCodeClient verifyCodeClient;
+
+	/**
+	 * 使用邮箱核心配置构造邮件验证码服务实例，将会自动创建所需客户端，仅适用于本地线程池管理验证码的场景
 	 *
-	 * @param mailConfig 邮件配置
+	 * @param mailConfig 邮箱核心配置
 	 */
 	public EmailVerifyCodeServiceImpl(MailConfig mailConfig) {
-		if (mailConfig == null) {
-			throw new IllegalArgumentException("mailConfig 不能为空！");
-		}
-		if (!CodeStorageMethod.LOCAL_THREAD_POOL.equals(mailConfig.getCodeStorage())) {
-			throw new IllegalArgumentException("当未传入Redis配置时，验证码过期方案必须为 local_thread_pool");
-		}
-		this.mailConfig = mailConfig;
-		this.verifyCodeClient = new ThreadPoolVerifyCodeClient();
-		this.mailClient = new MailClient(mailConfig);
-		this.freeMarkerClient = new FreeMarkerClient(mailConfig);
+		this(mailConfig, new MailClient(mailConfig), new FreeMarkerClient(mailConfig), new ThreadPoolVerifyCodeClient());
 	}
 
 	/**
-	 * 使用邮件配置对象和 Redis 配置对象初始化，适用于 Redis 的验证码过期方案
+	 * 使用邮箱核心配置和Redis配置构造邮件验证码服务实例，将会自动创建所需客户端，仅适用于Redis管理验证码的场景
 	 *
-	 * @param mailConfig        邮件配置
-	 * @param redisClientConfig Redis 配置
+	 * @param mailConfig  邮箱核心配置
+	 * @param redisConfig Redis 配置
 	 */
-	public EmailVerifyCodeServiceImpl(MailConfig mailConfig, RedisClientConfig redisClientConfig) {
-		if (mailConfig == null) {
-			throw new IllegalArgumentException("mailConfig 不能为空！");
-		}
-		if (redisClientConfig == null) {
-			throw new IllegalArgumentException("redisClientConfig 不能为空！");
-		}
-		if (!CodeStorageMethod.REDIS.equals(mailConfig.getCodeStorage())) {
-			throw new IllegalArgumentException("当传入 Redis 配置时，验证码过期方案也必须为 redis");
-		}
+	public EmailVerifyCodeServiceImpl(MailConfig mailConfig, RedisClientConfig redisConfig) {
+		this(mailConfig, new MailClient(mailConfig), new FreeMarkerClient(mailConfig), new RedisVerifyCodeClient(new LettuceClient(redisConfig)));
+	}
+
+	/**
+	 * 手动构造邮件验证码服务实例
+	 *
+	 * @param mailConfig       邮箱核心配置
+	 * @param mailClient       邮箱客户端
+	 * @param freeMarkerClient 渲染引擎客户端
+	 * @param verifyCodeClient 验证码客户端，根据不同配置传递不同实例：
+	 *                         <ul>
+	 *                         <li>使用本地线程池管理验证码，则传入{@link io.github.swsk33.codepostcore.client.impl.ThreadPoolVerifyCodeClient}实例</li>
+	 *                         <li>使用 Redis 管理验证码：则传入{@link io.github.swsk33.codepostcore.client.impl.RedisVerifyCodeClient}</li>
+	 *                         </ul>
+	 */
+	public EmailVerifyCodeServiceImpl(MailConfig mailConfig, MailClient mailClient, FreeMarkerClient freeMarkerClient, VerifyCodeClient verifyCodeClient) {
 		this.mailConfig = mailConfig;
-		this.verifyCodeClient = new RedisVerifyCodeClient(redisClientConfig);
-		this.mailClient = new MailClient(mailConfig);
-		this.freeMarkerClient = new FreeMarkerClient(mailConfig);
+		this.mailClient = mailClient;
+		this.freeMarkerClient = freeMarkerClient;
+		this.verifyCodeClient = verifyCodeClient;
 	}
 
 	@Override

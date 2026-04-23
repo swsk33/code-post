@@ -32,17 +32,25 @@ public class EmailNotifyServiceImpl implements EmailNotifyService {
 	private final FreeMarkerClient freeMarkerClient;
 
 	/**
-	 * 构造函数，使用邮件配置对象初始化通知服务
+	 * 使用核心配置构造邮件通知服务实例，将会自动创建相关客户端对象
 	 *
-	 * @param mailConfig 邮件配置对象
+	 * @param mailConfig 邮件核心配置
 	 */
 	public EmailNotifyServiceImpl(MailConfig mailConfig) {
-		if (mailConfig == null) {
-			throw new IllegalArgumentException("mailConfig 不能为空！");
-		}
+		this(mailConfig, new MailClient(mailConfig), new FreeMarkerClient(mailConfig));
+	}
+
+	/**
+	 * 手动构造邮件通知服务实例
+	 *
+	 * @param mailConfig       邮件核心配置
+	 * @param mailClient       邮件客户端
+	 * @param freeMarkerClient 渲染引擎客户端
+	 */
+	public EmailNotifyServiceImpl(MailConfig mailConfig, MailClient mailClient, FreeMarkerClient freeMarkerClient) {
 		this.mailConfig = mailConfig;
-		this.mailClient = new MailClient(mailConfig);
-		this.freeMarkerClient = new FreeMarkerClient(mailConfig);
+		this.mailClient = mailClient;
+		this.freeMarkerClient = freeMarkerClient;
 	}
 
 	@Override
