@@ -14,6 +14,11 @@ import lombok.experimental.SuperBuilder;
 public class RedisStandaloneConfig extends RedisClientConfig {
 
 	/**
+	 * 完整连接url，若该属性不为空，则会采用该url进行连接，并忽略其它配置
+	 */
+	private final String url;
+
+	/**
 	 * Redis地址，默认：127.0.0.1
 	 */
 	@Builder.Default

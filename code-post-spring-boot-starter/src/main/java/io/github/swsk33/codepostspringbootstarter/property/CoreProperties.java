@@ -14,7 +14,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class CoreProperties {
 
 	/**
-	 * SMTP服务器地址
+	 * SMTP 服务器地址
 	 */
 	private String smtpHost;
 
@@ -29,7 +29,7 @@ public class CoreProperties {
 	private String password;
 
 	/**
-	 * 是否开启TLS加密
+	 * 是否开启 TLS 加密
 	 */
 	private boolean enableTls = true;
 
@@ -54,7 +54,7 @@ public class CoreProperties {
 	private String siteName = "网站名";
 
 	/**
-	 * 启用是否发送HTML邮件
+	 * 启用是否发送 HTML 邮件
 	 */
 	private boolean enableHtml = false;
 
@@ -67,24 +67,24 @@ public class CoreProperties {
 	/**
 	 * 用于邮件验证码内容的模板文件名<br>
 	 * 该项只填写文件名！<br>
-	 * 该项会和templatePath配置值拼接得到完整文件路径
+	 * 该项会和 templatePath 配置值拼接得到完整文件路径
 	 */
 	private String codeTemplateName;
 
 	public MailConfig toMailConfig() {
 		return MailConfig.builder()
-			.smtpHost(smtpHost)
-			.email(email)
-			.password(password)
-			.enableTls(enableTls)
-			.codeStorage(codeStorage)
-			.codeFormat(codeFormat)
-			.codeLength(codeLength)
-			.siteName(siteName)
-			.enableHtml(enableHtml)
-			.templatePath(templatePath)
-			.codeTemplateName(codeTemplateName)
-			.build();
+				.smtpHost(smtpHost)
+				.email(email)
+				.password(password)
+				.enableTls(enableTls)
+				.codeStorage(codeStorage)
+				.codeFormat(codeFormat)
+				.codeLength(codeLength)
+				.siteName(siteName)
+				.enableHtml(enableHtml)
+				.templatePath(templatePath)
+				.codeTemplateName(codeTemplateName)
+				.build();
 	}
 
 }

@@ -17,7 +17,6 @@
 	</modules>
 
 	<properties>
-		<spring.test.version>6.1.4</spring.test.version>
 		<spring.boot2.test.version>2.7.12</spring.boot2.test.version>
 		<spring.boot3.test.version>3.2.5</spring.boot3.test.version>
 	</properties>

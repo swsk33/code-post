@@ -1,3 +1,4 @@
+io.github.swsk33.codepostspringbootstarter.autoconfigure.MailClientAutoConfiguration
 io.github.swsk33.codepostspringbootstarter.autoconfigure.MailServiceAutoConfiguration
 io.github.swsk33.codepostspringbootstarter.autoconfigure.config.MailConfigAutoConfiguration
-io.github.swsk33.codepostspringbootstarter.autoconfigure.config.storage.RedisConfigAutoConfiguration
+io.github.swsk33.codepostspringbootstarter.autoconfigure.config.RedisConfigAutoConfiguration

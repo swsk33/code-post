@@ -1,22 +1,19 @@
 package io.github.swsk33.codepostspringbootstarter.autoconfigure.config;
 
 import io.github.swsk33.codepostcore.model.config.MailConfig;
-import io.github.swsk33.codepostcore.param.CodeStorageMethod;
-import io.github.swsk33.codepostspringbootstarter.autoconfigure.MailServiceAutoConfiguration;
+import io.github.swsk33.codepostspringbootstarter.autoconfigure.MailClientAutoConfiguration;
 import io.github.swsk33.codepostspringbootstarter.property.CoreProperties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 邮件核心配置类的初始化
  */
 @Slf4j
-@Configuration
+@AutoConfiguration(before = MailClientAutoConfiguration.class)
 @EnableConfigurationProperties(CoreProperties.class)
-@AutoConfigureBefore(MailServiceAutoConfiguration.class)
 public class MailConfigAutoConfiguration {
 
 	/**
@@ -24,12 +21,7 @@ public class MailConfigAutoConfiguration {
 	 */
 	@Bean
 	public MailConfig mailConfig(CoreProperties coreProperties) {
-		MailConfig mailConfig = coreProperties.toMailConfig();
-		// 本地线程池无需额外配置对象
-		if (mailConfig.getCodeStorage().equals(CodeStorageMethod.LOCAL_THREAD_POOL)) {
-			log.info("使用基于本地线程池的验证码管理方案");
-		}
-		return mailConfig;
+		return coreProperties.toMailConfig();
 	}
 
 }

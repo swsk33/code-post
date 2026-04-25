@@ -5,7 +5,6 @@ import io.github.swsk33.codepostcore.model.config.RedisClientConfig;
 import io.github.swsk33.codepostcore.model.config.RedisClusterConfig;
 import io.github.swsk33.codepostcore.model.config.RedisSentinelConfig;
 import io.github.swsk33.codepostcore.model.config.RedisStandaloneConfig;
-import io.github.swsk33.codepostcore.util.URLEncodeUtils;
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.RedisURI;
 import io.lettuce.core.api.StatefulRedisConnection;
@@ -38,56 +37,83 @@ public class LettuceClient {
 	 * @param redisClientConfig Redis 配置对象
 	 */
 	public LettuceClient(RedisClientConfig redisClientConfig) {
-		RedisClientConfig config = Objects.requireNonNull(redisClientConfig, "redisClientConfig 不能为空！");
+		RedisClientConfig redisConfig = Objects.requireNonNull(redisClientConfig, "redisClientConfig 不能为空！");
 		// 根据配置对象不同类型判断初始化方式及其对象
 		// 单节点 Redis 配置
-		if (config instanceof RedisStandaloneConfig) {
+		if (redisConfig instanceof RedisStandaloneConfig) {
 			// 解析配置
-			RedisStandaloneConfig standaloneConfig = (RedisStandaloneConfig) config;
-			StringBuilder redisUrl = new StringBuilder("redis://");
-			if (!StrUtil.isEmpty(config.getPassword())) {
-				redisUrl.append(URLEncodeUtils.percentEncode(config.getPassword())).append("@");
+			RedisStandaloneConfig config = (RedisStandaloneConfig) redisConfig;
+			// 构建 RedisURI 对象
+			RedisURI redisUri;
+			// 优先采用 url 配置
+			if (!StrUtil.isEmpty(config.getUrl())) {
+				redisUri = RedisURI.create(config.getUrl());
+			} else {
+				// 否则，逐一构建
+				RedisURI.Builder uriBuilder = RedisURI.Builder
+						.redis(config.getHost(), config.getPort())
+						.withDatabase(config.getDatabase());
+				if (!StrUtil.isEmpty(config.getPassword())) {
+					uriBuilder.withPassword(config.getPassword());
+				}
+				redisUri = uriBuilder.build();
 			}
-			redisUrl.append(standaloneConfig.getHost()).append(":").append(standaloneConfig.getPort());
 			// 创建客户端
-			RedisClient redisClient = RedisClient.create(redisUrl.toString());
-			StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
+			StatefulRedisConnection<String, String> redisConnection = RedisClient.create(redisUri).connect();
 			this.commands = new SingleRedisCommandsWrapper(redisConnection.sync());
 			return;
 		}
 		// Redis 哨兵集群
-		if (config instanceof RedisSentinelConfig) {
+		if (redisConfig instanceof RedisSentinelConfig) {
 			// 解析配置
-			RedisSentinelConfig sentinelConfig = (RedisSentinelConfig) config;
-			StringBuilder redisUrl = new StringBuilder("redis-sentinel://");
-			if (!StrUtil.isEmpty(sentinelConfig.getPassword())) {
-				redisUrl.append(URLEncodeUtils.percentEncode(sentinelConfig.getPassword())).append("@");
+			RedisSentinelConfig config = (RedisSentinelConfig) redisConfig;
+			// 构建 RedisURI 对象
+			RedisURI redisUri;
+			// 优先使用 url
+			if (!StrUtil.isEmpty(config.getUrl())) {
+				redisUri = RedisURI.create(config.getUrl());
+			} else {
+				// 否则，逐一构建
+				RedisURI.Builder builder = RedisURI.builder();
+				// 构建哨兵地址
+				for (String node : config.getNodes()) {
+					String[] split = node.split(":");
+					builder.withSentinel(split[0], Integer.parseInt(split[1]));
+				}
+				// 构建密码
+				if (!StrUtil.isEmpty(config.getPassword())) {
+					builder.withPassword(config.getPassword());
+				}
+				// 构建其它属性
+				redisUri = builder.withDatabase(config.getDatabase())
+						.withSentinelMasterId(config.getMasterName())
+						.build();
 			}
-			redisUrl.append(sentinelConfig.getNodes()).append("?sentinelMasterId=").append(sentinelConfig.getMasterName());
 			// 创建客户端
-			RedisURI uri = RedisURI.create(redisUrl.toString());
-			RedisClient redisClient = RedisClient.create(uri);
-			StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
+			StatefulRedisConnection<String, String> redisConnection = RedisClient.create(redisUri).connect();
 			this.commands = new SingleRedisCommandsWrapper(redisConnection.sync());
 			return;
 		}
 		// Redis Cluster 集群
-		if (config instanceof RedisClusterConfig) {
+		if (redisConfig instanceof RedisClusterConfig) {
 			// 解析配置
-			RedisClusterConfig clusterConfig = (RedisClusterConfig) config;
-			List<RedisURI> uriList = new ArrayList<>();
-			String[] uriArray = clusterConfig.getNodes().split(",");
-			String redisUrlPrefix = !StrUtil.isEmpty(config.getPassword()) ? "redis://" + URLEncodeUtils.percentEncode(config.getPassword()) + "@" : "redis://";
-			for (String uri : uriArray) {
-				uriList.add(RedisURI.create(redisUrlPrefix + uri));
+			RedisClusterConfig config = (RedisClusterConfig) redisConfig;
+			// 解析节点，创建集群配置
+			List<RedisURI> clusterNodeUris = new ArrayList<>();
+			for (String node : config.getNodes()) {
+				String[] split = node.split(":");
+				RedisURI.Builder builder = RedisURI.Builder.redis(split[0], Integer.parseInt(split[1]));
+				if (!StrUtil.isEmpty(config.getPassword())) {
+					builder.withPassword(config.getPassword());
+				}
+				clusterNodeUris.add(builder.build());
 			}
 			// 创建客户端
-			RedisClusterClient redisClient = RedisClusterClient.create(uriList);
-			StatefulRedisClusterConnection<String, String> redisConnection = redisClient.connect();
+			StatefulRedisClusterConnection<String, String> redisConnection = RedisClusterClient.create(clusterNodeUris).connect();
 			this.commands = new ClusterRedisCommandsWrapper(redisConnection.sync());
 			return;
 		}
-		throw new IllegalArgumentException("不支持的 Redis 配置类型：" + config.getClass().getName());
+		throw new IllegalArgumentException("不支持的 Redis 配置类型：" + redisConfig.getClass().getName());
 	}
 
 	/**
