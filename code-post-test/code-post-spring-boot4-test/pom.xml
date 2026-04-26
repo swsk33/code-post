@@ -6,12 +6,12 @@
 		<version>2.0.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>code-post-spring-boot2-test</artifactId>
-	<name>CodePost - Spring Boot 2.x Test</name>
-	<description>CodePost的Spring Boot 2.x测试</description>
+	<artifactId>code-post-spring-boot4-test</artifactId>
+	<name>CodePost - Spring Boot 4.x Test</name>
+	<description>CodePost的Spring Boot 4.x测试</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
@@ -26,7 +26,7 @@
 		<!-- Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
 		<!-- Spring Boot Data Redis -->
@@ -40,13 +40,6 @@
 			<groupId>io.github.swsk33</groupId>
 			<artifactId>code-post-spring-boot-starter</artifactId>
 		</dependency>
-
-		<!-- 使用Spring Boot 2.x还需手动添加最新版jakarta.activation-api -->
-		<dependency>
-			<groupId>jakarta.activation</groupId>
-			<artifactId>jakarta.activation-api</artifactId>
-			<version>2.1.4</version>
-		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -55,7 +48,7 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>${spring.boot2.test.version}</version>
+				<version>${spring.boot4.test.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -67,7 +60,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring.boot2.test.version}</version>
+				<version>${spring.boot4.test.version}</version>
 				<configuration>
 					<excludes>
 						<exclude>

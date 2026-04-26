@@ -125,7 +125,7 @@ EmailNotifyService notifyService = new EmailNotifyServiceImpl(mailConfig);
 现在，写一个`RestController`调用邮箱验证码服务即可：
 
 ```java
-package io.github.swsk33.codepostspringboottest.api;
+package io.github.swsk33.codepostspringboot3test.api;
 
 import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,13 +2,13 @@
 server:
   port: 8802
 
-# CodePost邮件配置
+# CodePost 邮件配置
 io:
   github:
     swsk33:
       code-post:
         core:
-          # 发件邮箱的SMTP服务器
+          # 发件邮箱的 SMTP 服务器
           smtp-host: "smtp.163.com"
           # 用于发件的邮箱
           email: "${EMAIL}"
@@ -45,18 +45,49 @@ io:
           # 若不配置template-path和code-template-name或者配置模板路径不存在，则发送验证码邮件时会使用内置默认模板
           code-template-name: "test-template.ftlh"
 
-# Spring Data Redis配置
+# Spring Data Redis配置（3.x及其以上）
 spring:
   data:
     redis:
       # 单机
-      host: "${REDIS_HOST}"
-      port: ${REDIS_PORT}
-      password: "${REDIS_PASSWORD}"
+      host: "${REDIS_HOST:172.20.0.10}"
+      port: ${REDIS_PORT:6379}
+      password: "${REDIS_PASSWORD:dev-2333}"
       # 哨兵
       sentinel:
-        master: "my-master"
-        nodes: "202.114.148.161:7003,202.114.148.161:7004,202.114.148.161:7005"
-      # Cluster分片
-#      cluster:
-#        nodes: "202.114.148.161:8001,202.114.148.161:8002,202.114.148.161:8003,202.114.148.161:8004,202.114.148.161:8005,202.114.148.161:8006"
+        master: "${REDIS_SENTINEL_NAME:my-master}"
+        nodes:
+          - "${REDIS_SENTINEL_URL_1:172.20.0.30:8000}"
+          - "${REDIS_SENTINEL_URL_2:172.20.0.31:8001}"
+          - "${REDIS_SENTINEL_URL_3:172.20.0.32:8002}"
+      # Cluster 分片集群
+      cluster:
+        nodes:
+          - "${REDIS_CLUSTER_NODE_1:172.20.0.40:9000}"
+          - "${REDIS_CLUSTER_NODE_1:172.20.0.41:9001}"
+          - "${REDIS_CLUSTER_NODE_1:172.20.0.42:9002}"
+          - "${REDIS_CLUSTER_NODE_1:172.20.0.43:9003}"
+          - "${REDIS_CLUSTER_NODE_1:172.20.0.44:9004}"
+          - "${REDIS_CLUSTER_NODE_1:172.20.0.45:9005}"
+  # Spring Data Redis配置（兼容2.x）
+  redis:
+    # 单机
+    host: ${spring.data.redis.host}
+    port: ${spring.data.redis.port}
+    password: ${spring.data.redis.password}
+    # 哨兵
+    sentinel:
+      master: ${spring.data.redis.sentinel.master}
+      nodes:
+        - ${spring.data.redis.sentinel.nodes[0]}
+        - ${spring.data.redis.sentinel.nodes[1]}
+        - ${spring.data.redis.sentinel.nodes[2]}
+    # Cluster 分片集群
+    cluster:
+      nodes:
+        - ${spring.data.redis.cluster.nodes[0]}
+        - ${spring.data.redis.cluster.nodes[1]}
+        - ${spring.data.redis.cluster.nodes[2]}
+        - ${spring.data.redis.cluster.nodes[3]}
+        - ${spring.data.redis.cluster.nodes[4]}
+        - ${spring.data.redis.cluster.nodes[5]}

@@ -1,11 +1,11 @@
-package io.github.swsk33.codepostspringboottest.api;
+package io.github.swsk33.codeposttestcommon.api;
 
 import io.github.swsk33.codepostcore.service.EmailNotifyService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/api/notify")
-public class NotifyMailAPI {
+public class NotifyMailAPI implements InitializingBean {
 
 	/**
 	 * 自动装配邮件通知服务
@@ -33,8 +33,8 @@ public class NotifyMailAPI {
 	/**
 	 * 初始化模板变量列表
 	 */
-	@PostConstruct
-	private void initDataModels() {
+	@Override
+	public void afterPropertiesSet() {
 		dataModels = new HashMap<>();
 		// 模板变量名：anthologyName，变量值：Redis深度历险
 		dataModels.put("anthologyName", "Redis深度历险");

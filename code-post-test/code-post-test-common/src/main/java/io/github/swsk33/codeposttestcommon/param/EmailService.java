@@ -1,4 +1,4 @@
-package io.github.swsk33.codepostspringboottest.param;
+package io.github.swsk33.codeposttestcommon.param;
 
 /**
  * 代表邮件验证码服务的枚举（作为服务名的键）

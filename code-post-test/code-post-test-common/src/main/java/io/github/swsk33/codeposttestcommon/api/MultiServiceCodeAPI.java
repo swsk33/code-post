@@ -1,10 +1,10 @@
-package io.github.swsk33.codepostspringboottest.api;
+package io.github.swsk33.codeposttestcommon.api;
 
 import io.github.swsk33.codepostcore.context.ServiceNameContext;
 import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
-import io.github.swsk33.codepostspringboottest.param.EmailService;
-import jakarta.annotation.PostConstruct;
+import io.github.swsk33.codeposttestcommon.param.EmailService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @RestController
 @RequestMapping("/api/code/multi-service")
-public class MultiServiceCodeAPI {
+public class MultiServiceCodeAPI implements InitializingBean {
 
 	/**
 	 * 自动装配邮件验证码服务
@@ -27,12 +27,9 @@ public class MultiServiceCodeAPI {
 	@Autowired
 	private EmailVerifyCodeService emailVerifyCodeService;
 
-	/**
-	 * 注册你的服务
-	 */
-	@PostConstruct
-	private void initService() {
-		// 调用ServiceNameContext类的静态方法即可完成服务名注册
+	@Override
+	public void afterPropertiesSet() {
+		// 调用 ServiceNameContext 类的静态方法即可完成服务名注册
 		ServiceNameContext.register(EmailService.USER_LOGIN, "用户登录");
 		ServiceNameContext.register(EmailService.PASSWORD_RESET, "密码重置");
 		ServiceNameContext.register(EmailService.USER_DELETE, "用户注销");

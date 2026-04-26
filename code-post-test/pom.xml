@@ -12,17 +12,27 @@
 	<description>CodePost 的测试父模块</description>
 
 	<modules>
+		<module>code-post-test-common</module>
 		<module>code-post-spring-boot2-test</module>
 		<module>code-post-spring-boot3-test</module>
+		<module>code-post-spring-boot4-test</module>
 	</modules>
 
 	<properties>
 		<spring.boot2.test.version>2.7.12</spring.boot2.test.version>
-		<spring.boot3.test.version>3.2.5</spring.boot3.test.version>
+		<spring.boot3.test.version>3.5.13</spring.boot3.test.version>
+		<spring.boot4.test.version>4.0.5</spring.boot4.test.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
+			<!-- CodePost Test Common -->
+			<dependency>
+				<groupId>io.github.swsk33</groupId>
+				<artifactId>code-post-test-common</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
 			<!-- CodePost Spring Boot Starter -->
 			<dependency>
 				<groupId>io.github.swsk33</groupId>

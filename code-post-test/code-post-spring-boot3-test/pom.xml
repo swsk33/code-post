@@ -17,6 +17,12 @@
 	</properties>
 
 	<dependencies>
+		<!-- CodePost Test Common -->
+		<dependency>
+			<groupId>io.github.swsk33</groupId>
+			<artifactId>code-post-test-common</artifactId>
+		</dependency>
+
 		<!-- Spring Boot Web -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

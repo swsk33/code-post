@@ -174,7 +174,7 @@ public class FreeMarkerClient {
 				loader = new FileTemplateLoader(FileUtil.file(templateFilePath));
 				log.info("模板文件目录位于file:{}", templateFilePath);
 			}
-			Configuration resolved = new Configuration(Configuration.VERSION_2_3_34);
+			Configuration resolved = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
 			resolved.setDefaultEncoding("UTF-8");
 			resolved.setTemplateLoader(loader);
 			log.info("模板引擎已完成初始化！");
