@@ -5,13 +5,17 @@
 		<img src="https://img.shields.io/maven-central/v/io.github.swsk33/code-post-parent
 " />
 	</a>
-	<a target="_blank" href="https://www.gnu.org/licenses/old-licenses/gpl-2.0.html">
+	<a target="_blank" href="https://www.apache.org/licenses/">
 		<img alt="GitHub" src="https://img.shields.io/github/license/swsk33/code-post">
 	</a>
-	<a target="_blank" href="https://www.azul.com/downloads/#downloads-table-zulu">
+	<a target="_blank" href="https://bell-sw.com/pages/downloads/#jdk-8-lts">
 		<img alt="Static Badge" src="https://img.shields.io/badge/1.8%2B-blue?label=JDK">
 	</a>
+	<a href="https://zread.ai/swsk33/code-post" target="_blank">
+		<img src="https://img.shields.io/badge/Ask_Zread-_.svg?style=flat&color=00b0aa&labelColor=000000&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuOTYxNTYgMS42MDAxSDIuMjQxNTZDMS44ODgxIDEuNjAwMSAxLjYwMTU2IDEuODg2NjQgMS42MDE1NiAyLjI0MDFWNC45NjAxQzEuNjAxNTYgNS4zMTM1NiAxLjg4ODEgNS42MDAxIDIuMjQxNTYgNS42MDAxSDQuOTYxNTZDNS4zMTUwMiA1LjYwMDEgNS42MDE1NiA1LjMxMzU2IDUuNjAxNTYgNC45NjAxVjIuMjQwMUM1LjYwMTU2IDEuODg2NjQgNS4zMTUwMiAxLjYwMDEgNC45NjE1NiAxLjYwMDFaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00Ljk2MTU2IDEwLjM5OTlIMi4yNDE1NkMxLjg4ODEgMTAuMzk5OSAxLjYwMTU2IDEwLjY4NjQgMS42MDE1NiAxMS4wMzk5VjEzLjc1OTlDMS42MDE1NiAxNC4xMTM0IDEuODg4MSAxNC4zOTk5IDIuMjQxNTYgMTQuMzk5OUg0Ljk2MTU2QzUuMzE1MDIgMTQuMzk5OSA1LjYwMTU2IDE0LjExMzQgNS42MDE1NiAxMy43NTk5VjExLjAzOTlDNS42MDE1NiAxMC42ODY0IDUuMzE1MDIgMTAuMzk5OSA0Ljk2MTU2IDEwLjM5OTlaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik0xMy43NTg0IDEuNjAwMUgxMS4wMzg0QzEwLjY4NSAxLjYwMDEgMTAuMzk4NCAxLjg4NjY0IDEwLjM5ODQgMi4yNDAxVjQuOTYwMUMxMC4zOTg0IDUuMzEzNTYgMTAuNjg1IDUuNjAwMSAxMS4wMzg0IDUuNjAwMUgxMy43NTg0QzE0LjExMTkgNS42MDAxIDE0LjM5ODQgNS4zMTM1NiAxNC4zOTg0IDQuOTYwMVYyLjI0MDFDMTQuMzk4NCAxLjg4NjY0IDE0LjExMTkgMS42MDAxIDEzLjc1ODQgMS42MDAxWiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJNNCAxMkwxMiA0TDQgMTJaIiBmaWxsPSIjZmZmIi8%2BCjxwYXRoIGQ9Ik00IDEyTDEyIDQiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K&logoColor=ffffff" alt="zread"/>
+	</a>
 </p>
+
 
 
 ## 1，介绍
@@ -45,7 +49,7 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 无论是普通Java项目，还是Spring，以及Spring Boot都可以使用该框架，需要满足下列基本要求：
 
 - JDK 1.8及其以上版本
-- Spring Boot环境集成时，需要Spring Boot 2.x及其以上版本，建议使用2.7.x及其以上版本
+- Spring Boot环境集成时，需要Spring Boot 2.7.x及其以上版本，支持Spring Boot 2.7.x - 4.x
 
 ### (2) 开启邮箱SMTP服务
 
@@ -70,6 +74,21 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 	<version>2.0.0</version>
 </dependency>
 ```
+
+如果你是用的是Spring Boot 2.x版本，则还要引入`jakarta.activation-api`依赖：
+
+```xml
+<!-- 使用Spring Boot 2.x还需手动添加最新版jakarta.activation-api -->
+<dependency>
+	<groupId>jakarta.activation</groupId>
+	<artifactId>jakarta.activation-api</artifactId>
+	<version>2.1.4</version>
+</dependency>
+```
+
+> Spring Boot 2.x使用Java EE规范，而Angus Mail采用Jakarta EE规范，而不引入`jakarta.activation-api`，则会在发送富文本邮件时抛出异常：`java.lang.NoClassDefFoundError: jakarta/activation/DataHandler`。
+>
+> 在Maven中央仓库检查`jakarta.activation-api`的最新版：[传送门](https://central.sonatype.com/artifact/jakarta.activation/jakarta.activation-api)
 
 然后在Spring Boot配置文件`application.yml`中，加入下列配置：
 
@@ -106,26 +125,12 @@ io:
 
 上述配置中邮箱、授权码替换成第(2)步得到的，这里使用的是`YAML`格式的配置，使用`properties`同理。
 
-如果不使用Spring Boot Starter，也可以直接使用不可变配置对象构建服务实例：
-
-```java
-MailConfig mailConfig = MailConfig.builder()
-	.smtpHost("smtp.163.com")
-	.email("your-email@example.com")
-	.password("your-secret")
-	.codeStorage(CodeStorageMethod.LOCAL_THREAD_POOL)
-	.build();
-
-EmailVerifyCodeService verifyCodeService = new EmailVerifyCodeServiceImpl(mailConfig);
-EmailNotifyService notifyService = new EmailNotifyServiceImpl(mailConfig);
-```
-
 ### (4) 编写API测试
 
 现在，写一个`RestController`调用邮箱验证码服务即可：
 
 ```java
-package io.github.swsk33.codepostspringboot3test.api;
+package io.github.swsk33.codeposttestcommon.api;
 
 import io.github.swsk33.codepostcore.service.EmailVerifyCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -157,7 +162,7 @@ public class SimpleEmailCodeAPI {
 	 * @return 消息
 	 */
 	@GetMapping("/send/mail/{email}/user-id/{userId}")
-	public String sendCode(@PathVariable("email") String email, @PathVariable("userId") int userId) {
+	public String sendCode(@PathVariable String email, @PathVariable int userId) {
 		// 调用sendCodeAsync方法即可一键完成验证码生成发送操作
 		// 参数分别是：邮箱对应的用户id、用户邮箱、验证码有效时长、验证码有效时长单位
 		emailVerifyCodeService.sendCodeAsync(userId, email, 1, TimeUnit.MINUTES);
@@ -172,7 +177,7 @@ public class SimpleEmailCodeAPI {
 	 * @return 消息
 	 */
 	@GetMapping("/verify/user-id/{userId}/code/{inputCode}")
-	public String verifyCode(@PathVariable("userId") int userId, @PathVariable("inputCode") String inputCode) {
+	public String verifyCode(@PathVariable int userId, @PathVariable String inputCode) {
 		// 调用verifyCode方法即可一键完成验证码校验操作
 		// 参数分别是：邮箱对应的用户id、用户传入的验证码（用于校验）
 		// 校验成功返回true，并且验证码也会立即失效
@@ -197,22 +202,7 @@ public class SimpleEmailCodeAPI {
 
 通过仅仅几行代码，我们就完成了验证码的发送、校验操作了！在这背后，框架自动地完成了验证码生成、管理、邮件渲染发送等操作。
 
-## 3，常见问题排查
-
-### (1) 发送富文本邮件时抛出异常：`java.lang.NoClassDefFoundError: jakarta/activation/DataHandler`
-
-该问题通常出现在JDK 1.8 + Spring Boot 2.x的环境下，这是由于Spring Boot 2.x使用的Java EE规范和Angus Mail的Jakarta EE规范不一致导致，在项目中加入最新的`jakarta.activation-api`依赖即可，而不是继承Spring Boot中的版本：
-
-```xml
-<!-- 使用Spring Boot 2.x还需手动添加最新版jakarta.activation-api -->
-<dependency>
-	<groupId>jakarta.activation</groupId>
-	<artifactId>jakarta.activation-api</artifactId>
-	<version>2.1.3</version>
-</dependency>
-```
-
-## 4，文档
+## 3，文档
 
 关于该框架详细功能以及API，请参考：
 
