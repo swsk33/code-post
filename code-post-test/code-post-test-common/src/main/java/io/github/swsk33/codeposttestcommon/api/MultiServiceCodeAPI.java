@@ -44,7 +44,7 @@ public class MultiServiceCodeAPI implements InitializingBean {
 	 * @return 结果
 	 */
 	@GetMapping("/login-code-send/mail/{mail}/user-id/{userId}")
-	public String loginCodeSend(@PathVariable("mail") String mail, @PathVariable("userId") int userId) {
+	public String loginCodeSend(@PathVariable String mail, @PathVariable int userId) {
 		emailVerifyCodeService.sendCodeAsync(EmailService.USER_LOGIN, userId, mail, 1, TimeUnit.MINUTES);
 		return "用户登录验证码已发送！";
 	}
@@ -57,7 +57,7 @@ public class MultiServiceCodeAPI implements InitializingBean {
 	 * @return 结果
 	 */
 	@GetMapping("/reset-code-send/mail/{mail}/user-id/{userId}")
-	public String passwordResetCodeSend(@PathVariable("mail") String mail, @PathVariable("userId") int userId) {
+	public String passwordResetCodeSend(@PathVariable String mail, @PathVariable int userId) {
 		emailVerifyCodeService.sendCodeAsync(EmailService.PASSWORD_RESET, userId, mail, 1, TimeUnit.MINUTES);
 		return "用户密码重置验证码已发送！";
 	}
@@ -70,7 +70,7 @@ public class MultiServiceCodeAPI implements InitializingBean {
 	 * @return 结果
 	 */
 	@GetMapping("/login-code-verify/user-id/{userId}/code/{inputCode}")
-	public String verifyLoginCode(@PathVariable("userId") int userId, @PathVariable("inputCode") String inputCode) {
+	public String verifyLoginCode(@PathVariable int userId, @PathVariable String inputCode) {
 		boolean result = emailVerifyCodeService.verifyCode(EmailService.USER_LOGIN, userId, inputCode);
 		return result ? "用户登录验证码校验成功！" : "验证码错误或者不存在！";
 	}
@@ -83,7 +83,7 @@ public class MultiServiceCodeAPI implements InitializingBean {
 	 * @return 结果
 	 */
 	@GetMapping("/reset-code-verify/user-id/{userId}/code/{inputCode}")
-	public String verifyResetCode(@PathVariable("userId") int userId, @PathVariable("inputCode") String inputCode) {
+	public String verifyResetCode(@PathVariable int userId, @PathVariable String inputCode) {
 		boolean result = emailVerifyCodeService.verifyCode(EmailService.PASSWORD_RESET, userId, inputCode);
 		return result ? "用户密码重置验证码校验成功！" : "验证码错误或者不存在！";
 	}

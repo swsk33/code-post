@@ -91,6 +91,13 @@
 				<artifactId>code-post-core</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+
+			<!-- CodePost Spring Boot Starter -->
+			<dependency>
+				<groupId>io.github.swsk33</groupId>
+				<artifactId>code-post-spring-boot-starter</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
