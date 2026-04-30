@@ -29,6 +29,7 @@
 		<dependency>
 			<groupId>io.github.swsk33</groupId>
 			<artifactId>code-post-core</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- JUnit 单元测试 -->

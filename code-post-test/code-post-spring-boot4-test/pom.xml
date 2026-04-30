@@ -11,13 +11,12 @@
 	<description>CodePost的Spring Boot 4.x测试</description>
 
 	<properties>
-		<java.version>17</java.version>
-		<maven.compiler.source>${java.version}</maven.compiler.source>
-		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<java.version>21</java.version>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
 	</properties>
 
 	<dependencies>
-		<!-- CodePost Test Common -->
+		<!-- CodePost 测试公用类（已包含Starter） -->
 		<dependency>
 			<groupId>io.github.swsk33</groupId>
 			<artifactId>code-post-test-common</artifactId>
@@ -33,12 +32,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-
-		<!-- CodePost Spring Boot Starter -->
-		<dependency>
-			<groupId>io.github.swsk33</groupId>
-			<artifactId>code-post-spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>
 
@@ -61,14 +54,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.boot4.test.version}</version>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

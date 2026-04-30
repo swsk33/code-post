@@ -11,10 +11,11 @@
 	<description>CodePost 测试公共模块</description>
 
 	<dependencies>
-		<!-- CodePost 核心 -->
+		<!-- CodePost Spring Boot Starter -->
 		<dependency>
 			<groupId>io.github.swsk33</groupId>
 			<artifactId>code-post-spring-boot-starter</artifactId>
+			<version>${project.version}</version>
 			<optional>true</optional>
 		</dependency>
 

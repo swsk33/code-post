@@ -17,7 +17,7 @@
 	</properties>
 
 	<dependencies>
-		<!-- CodePost Test Common -->
+		<!-- CodePost 测试公用类（已包含Starter） -->
 		<dependency>
 			<groupId>io.github.swsk33</groupId>
 			<artifactId>code-post-test-common</artifactId>
@@ -33,12 +33,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-
-		<!-- CodePost Spring Boot Starter -->
-		<dependency>
-			<groupId>io.github.swsk33</groupId>
-			<artifactId>code-post-spring-boot-starter</artifactId>
 		</dependency>
 
 		<!-- 使用Spring Boot 2.x还需手动添加最新版jakarta.activation-api -->
@@ -68,14 +62,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.boot2.test.version}</version>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
