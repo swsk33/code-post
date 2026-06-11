@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.swsk33</groupId>
 	<artifactId>code-post-parent</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<packaging>pom</packaging>
 	<name>CodePost - Parent</name>
 	<description>CodePost是一个简单的邮件验证码生成和发送框架，用于简化后端服务中生成、发送和验证邮件验证码的逻辑</description>
@@ -71,7 +71,7 @@
 			<dependency>
 				<groupId>cn.hutool</groupId>
 				<artifactId>hutool-bom</artifactId>
-				<version>5.8.44</version>
+				<version>5.8.46</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -115,6 +115,12 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
+						</path>
+
+						<path>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-configuration-processor</artifactId>
+							<version>${spring.boot.starter.version}</version>
 						</path>
 					</annotationProcessorPaths>
 				</configuration>

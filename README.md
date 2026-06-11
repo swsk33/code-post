@@ -71,7 +71,7 @@ CodePost是一款简单的Java邮件验证码框架，它对邮件验证码的�
 <dependency>
 	<groupId>io.github.swsk33</groupId>
 	<artifactId>code-post-spring-boot-starter</artifactId>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 </dependency>
 ```
 
